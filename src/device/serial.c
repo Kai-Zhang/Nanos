@@ -51,7 +51,7 @@ int printf (const char* format, ...) {
 				break;
 			case 'c':
 				putchar (*para);
-				++ para;
+				para = (char*)((int*)para + 1);
 				break;
 			case 's':
 				prt = *((char**)para);
