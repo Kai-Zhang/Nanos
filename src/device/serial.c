@@ -29,7 +29,8 @@ int printf (const char* format, ...) {
 	char* para = (char*)(&format + 1);
 	char* print = NULL;
 	int count = 0; unsigned int integer = 0;
-
+	uint8_t a = 0;
+	count = a;
 	while (*str != 0) {
 		if (*str != '%') {
 			putchar (*str);
