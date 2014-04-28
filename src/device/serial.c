@@ -43,7 +43,7 @@ int printf (const char* format, ...) {
 				integer = *((uint32_t*)para);
 				if ((int)integer < 0) {
 					putchar ('-');
-					integer = (uint32_t)(-(int)integer);
+					integer = (~integer) + 1;
 				}
 				print = buf + sizeof(buf) - 2;
 				do {
