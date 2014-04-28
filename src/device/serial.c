@@ -47,18 +47,18 @@ int printf (const char* format, ...) {
 				for (; *prt; ++ prt) {
 					putchar (*prt);
 				}
-				para = (char*)((int*)para + 1);
+				para += 4; 
 				break;
 			case 'c':
 				putchar (*para);
-				para = (char*)((int*)para + 1);
+				para += 4;
 				break;
 			case 's':
 				prt = *((char**)para);
 				for (; *prt; ++ prt) {
 					putchar (*prt);
 				}
-				para = (char*)((char**)para + 1);
+				para += 4;
 				break;
 			default:
 				putchar (*str);
