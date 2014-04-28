@@ -28,7 +28,7 @@ int printf (const char* format, ...) {
 	const char* str = format;
 	char* para = (char*)(&format + 1);
 	char* print = NULL;
-	int count = 0; int integer = 0;
+	int count = 0; unsigned int integer = 0;
 
 	while (*str != 0) {
 		if (*str != '%') {
