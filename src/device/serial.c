@@ -27,8 +27,8 @@ int printf (const char* format, ...) {
 	static char buf [30] = {0};
 	const char* str = format;
 	char* para = (char*)(&format + 1);
-	char* prt = NULL;
-	int count = 0; int dec = 0;
+	char* print = NULL;
+	int count = 0; int integer = 0;
 
 	while (*str != 0) {
 		if (*str != '%') {
@@ -39,24 +39,36 @@ int printf (const char* format, ...) {
 		}
 		switch (*(++str)) {
 			case 'd':
-				dec = *((int*)para);
-				prt = buf + sizeof(buf) - 2;
+				integer = *((int*)para);
+				print = buf + sizeof(buf) - 2;
 				do {
-					*--prt = '0' + dec % 10;
-				} while (dec /= 10);
-				for (; *prt; ++ prt) {
-					putchar (*prt);
+					*--print = '0' + integer % 10;
+				} while (integer /= 10);
+				for (; *print; ++ print) {
+					putchar (*print);
 				}
 				para += 4; 
+				break;
+			case 'x':
+				integer = *((int*)para);
+				print = buf + sizeof(buf) - 2;
+				do {
+					*--print = (integer % 16 < 10) ?
+								'0' + integer % 16 : 'a' + integer % 16 - 10;
+				} while (integer >>= 4);
+				for (; *print; ++ print) {
+					putchar (*print);
+				}
+				para += 4;
 				break;
 			case 'c':
 				putchar (*para);
 				para += 4;
 				break;
 			case 's':
-				prt = *((char**)para);
-				for (; *prt; ++ prt) {
-					putchar (*prt);
+				print = *((char**)para);
+				for (; *print; ++ print) {
+					putchar (*print);
 				}
 				para += 4;
 				break;
