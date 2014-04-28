@@ -50,7 +50,7 @@ int printf (const char* format, ...) {
 				para += 4; 
 				break;
 			case 'x':
-				integer = *((int*)para);
+				integer = *((unsigned int*)para);
 				print = buf + sizeof(buf) - 2;
 				do {
 					*--print = (integer % 16 < 10) ?
