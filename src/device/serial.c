@@ -26,11 +26,11 @@ putchar(char ch) {
 int printf (const char* format, ...) {
 	static char buf [30] = {0};
 	const char* str = format;
-	char* para = (char*)(&format + 1);
+	uint8_t* para = (uint8_t*)(&format + 1);
 	char* print = NULL;
-	int count = 0; unsigned int integer = 0;
-	uint8_t a = 0;
-	count = a;
+	uint32_t integer = 0;
+	int count = 0;
+
 	while (*str != 0) {
 		if (*str != '%') {
 			putchar (*str);
@@ -40,7 +40,11 @@ int printf (const char* format, ...) {
 		}
 		switch (*(++str)) {
 			case 'd':
-				integer = *((int*)para);
+				integer = *((uint32_t*)para);
+				if ((int)integer < 0) {
+					putchar ('-');
+					integer = integer ^ 0x80000000;
+				}
 				print = buf + sizeof(buf) - 2;
 				do {
 					*--print = '0' + integer % 10;
@@ -51,7 +55,7 @@ int printf (const char* format, ...) {
 				para += 4; 
 				break;
 			case 'x':
-				integer = *((unsigned int*)para);
+				integer = *((uint32_t*)para);
 				print = buf + sizeof(buf) - 2;
 				do {
 					*--print = (integer % 16 < 10) ?
