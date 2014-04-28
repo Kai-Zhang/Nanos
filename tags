@@ -1,0 +1,175 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ASFLAGS	Makefile	/^ASFLAGS = -m32 -MD$/;"	kind:macro
+BLUE_SCREEN_TEXT	src/lib/abort.c	23;"	kind:macro	file:
+CC	Makefile	/^CC = gcc$/;"	kind:macro
+CFILES	Makefile	/^CFILES = $(shell find src\/ -name "*.c")$/;"	kind:macro
+CFLAGS	Makefile	/^CFLAGS = -m32 -march=i386 -static -MD -std=gnu89 -ggdb \\$/;"	kind:macro
+DPL_KERNEL	include/x86/memory.h	4;"	kind:macro
+DPL_USER	include/x86/memory.h	5;"	kind:macro
+ELFHeader	boot/boot.h	/^struct ELFHeader {$/;"	kind:struct
+ELFHeader::ehsize	boot/boot.h	/^	unsigned short ehsize;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::elf	boot/boot.h	/^	unsigned char  elf[12];$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::entry	boot/boot.h	/^	unsigned int   entry;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::flags	boot/boot.h	/^	unsigned int   flags;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::machine	boot/boot.h	/^	unsigned short machine;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::magic	boot/boot.h	/^	unsigned int   magic;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::phnum	boot/boot.h	/^	unsigned short phnum;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::shentsize	boot/boot.h	/^	unsigned short shentsize;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::shnum	boot/boot.h	/^	unsigned short shnum;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::shoff	boot/boot.h	/^	unsigned int   shoff;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::shstrndx	boot/boot.h	/^	unsigned short shstrndx;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::type	boot/boot.h	/^	unsigned short type;$/;"	kind:member	struct:ELFHeader	access:public
+ELFHeader::version	boot/boot.h	/^	unsigned int   version;$/;"	kind:member	struct:ELFHeader	access:public
+FALSE	include/common/const.h	5;"	kind:macro
+FREQ_8253	src/device/timer.c	7;"	kind:macro	file:
+GDT_ENTRY	boot/asm.h	2;"	kind:macro
+GITFLAGS	Makefile	/^GITFLAGS = -q --author='tracer <tracer@njuoslab.org>' --no-verify --allow-empty$/;"	kind:macro
+GateDescriptor	include/x86/memory.h	/^struct GateDescriptor {$/;"	kind:struct
+GateDescriptor::offset_15_0	include/x86/memory.h	/^	uint32_t offset_15_0      : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::offset_31_16	include/x86/memory.h	/^	uint32_t offset_31_16     : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::pad0	include/x86/memory.h	/^	uint32_t pad0             : 8;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::present	include/x86/memory.h	/^	uint32_t present          : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::privilege_level	include/x86/memory.h	/^	uint32_t privilege_level  : 2;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::segment	include/x86/memory.h	/^	uint32_t segment          : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::system	include/x86/memory.h	/^	uint32_t system           : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+GateDescriptor::type	include/x86/memory.h	/^	uint32_t type             : 4;$/;"	kind:member	struct:GateDescriptor	access:public
+HZ	include/device/timer.h	4;"	kind:macro
+INTERRUPT_GATE_32	src/irq/idt.c	3;"	kind:macro	file:
+IRQ_SLAVE	src/irq/i8259.c	5;"	kind:macro	file:
+LD	Makefile	/^LD = ld$/;"	kind:macro
+LDFLAGS	Makefile	/^LDFLAGS = -melf_i386$/;"	kind:macro
+NR_IRQ	include/x86/cpu.h	34;"	kind:macro
+NR_SEGMENTS	include/x86/memory.h	7;"	kind:macro
+NULL	include/common/const.h	7;"	kind:macro
+OBJS	Makefile	/^OBJS = $(CFILES:.c=.o) $(SFILES:.S=.o)$/;"	kind:macro
+PORT_PIC_MASTER	src/irq/i8259.c	3;"	kind:macro	file:
+PORT_PIC_SLAVE	src/irq/i8259.c	4;"	kind:macro	file:
+ProgramHeader	boot/boot.h	/^struct ProgramHeader {$/;"	kind:struct
+ProgramHeader::align	boot/boot.h	/^	unsigned int align;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::filesz	boot/boot.h	/^	unsigned int filesz;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::flags	boot/boot.h	/^	unsigned int flags;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::memsz	boot/boot.h	/^	unsigned int memsz;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::off	boot/boot.h	/^	unsigned int off;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::paddr	boot/boot.h	/^	unsigned int paddr;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::type	boot/boot.h	/^	unsigned int type;$/;"	kind:member	struct:ProgramHeader	access:public
+ProgramHeader::vaddr	boot/boot.h	/^	unsigned int vaddr;$/;"	kind:member	struct:ProgramHeader	access:public
+QEMU	Makefile	/^QEMU = qemu-system-i386$/;"	kind:macro
+SECTSIZE	boot/main.c	11;"	kind:macro	file:
+SEG_ASM	boot/asm.h	9;"	kind:macro
+SEG_KERNEL_CODE	include/x86/memory.h	8;"	kind:macro
+SEG_KERNEL_DATA	include/x86/memory.h	9;"	kind:macro
+SEG_NULLASM	boot/asm.h	5;"	kind:macro
+SERIAL_PORT	include/device/serial.h	5;"	kind:macro
+SFILES	Makefile	/^SFILES = $(shell find src\/ -name "*.S")$/;"	kind:macro
+TIMER_PORT	src/device/timer.c	6;"	kind:macro	file:
+TRAP_GATE_32	src/irq/idt.c	4;"	kind:macro	file:
+TRUE	include/common/const.h	4;"	kind:macro
+TrapFrame	include/x86/memory.h	/^struct TrapFrame {$/;"	kind:struct
+TrapFrame::eax	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::ebp	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::ebx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::ecx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::edi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::edx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::esi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::xxx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+__ASSERT_H__	include/common/assert.h	2;"	kind:macro
+__COMMON_H__	include/common.h	2;"	kind:macro
+__CONST_H__	include/common/const.h	2;"	kind:macro
+__DEVICE_H__	include/device.h	2;"	kind:macro
+__IRQ_H__	include/x86/irq.h	2;"	kind:macro
+__TIMER_H__	include/device/timer.h	2;"	kind:macro
+__TYPES_H__	include/common/types.h	2;"	kind:macro
+__X86_CPU_H__	include/x86/cpu.h	2;"	kind:macro
+__X86_IO_H__	include/x86/io.h	2;"	kind:macro
+__X86_MEMORY_H__	include/x86/memory.h	2;"	kind:macro
+__x86_H__	include/x86.h	2;"	kind:macro
+abort	src/lib/abort.c	/^abort(const char *fname, int line) {$/;"	kind:function	signature:(const char *fname, int line)
+align	boot/boot.h	/^	unsigned int align;$/;"	kind:member	struct:ProgramHeader	access:public
+append	src/lib/abort.c	/^append(char **p, const char *str) {$/;"	kind:function	file:	signature:(char **p, const char *str)
+asm_do_irq	src/irq/do_irq.S	/^asm_do_irq:$/;"	kind:label
+assert	include/common/assert.h	7;"	kind:macro
+bootmain	boot/main.c	/^bootmain(void) {$/;"	kind:function	signature:(void)
+disable_interrupt	include/x86/cpu.h	/^disable_interrupt(void) {$/;"	kind:function	signature:(void)
+display_message	src/lib/abort.c	/^display_message(const char *file, int line) {$/;"	kind:function	file:	signature:(const char *file, int line)
+eax	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+ebp	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+ebx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+ecx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+edi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+edx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+ehsize	boot/boot.h	/^	unsigned short ehsize;$/;"	kind:member	struct:ELFHeader	access:public
+elf	boot/boot.h	/^	unsigned char  elf[12];$/;"	kind:member	struct:ELFHeader	access:public
+enable_interrupt	include/x86/cpu.h	/^enable_interrupt(void) {$/;"	kind:function	signature:(void)
+entry	boot/boot.h	/^	unsigned int   entry;$/;"	kind:member	struct:ELFHeader	access:public
+entry	src/main.c	/^entry(void) {$/;"	kind:function	signature:(void)
+esi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+filesz	boot/boot.h	/^	unsigned int filesz;$/;"	kind:member	struct:ProgramHeader	access:public
+flags	boot/boot.h	/^	unsigned int   flags;$/;"	kind:member	struct:ELFHeader	access:public
+flags	boot/boot.h	/^	unsigned int flags;$/;"	kind:member	struct:ProgramHeader	access:public
+gdt	boot/start.S	/^gdt:$/;"	kind:label
+gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	kind:label
+idt	src/irq/idt.c	/^struct GateDescriptor idt[NR_IRQ];$/;"	kind:variable	typeref:struct:GateDescriptor
+in_byte	boot/boot.h	/^in_byte(short port) {$/;"	kind:function	signature:(short port)
+in_byte	include/x86/io.h	/^in_byte(uint16_t port) {$/;"	kind:function	signature:(uint16_t port)
+in_long	boot/boot.h	/^in_long(short port) {$/;"	kind:function	signature:(short port)
+init_idt	src/irq/idt.c	/^void init_idt() {$/;"	kind:function
+init_intr	src/irq/i8259.c	/^init_intr(void) {$/;"	kind:function	signature:(void)
+init_serial	src/device/serial.c	/^init_serial(void) {$/;"	kind:function	signature:(void)
+init_timer	src/device/timer.c	/^init_timer(void) {$/;"	kind:function	signature:(void)
+int16_t	include/common/types.h	/^typedef          short int16_t;$/;"	kind:typedef
+int32_t	include/common/types.h	/^typedef          int   int32_t;$/;"	kind:typedef
+int8_t	include/common/types.h	/^typedef          char  int8_t;$/;"	kind:typedef
+irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
+irq_handle	src/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	kind:function	signature:(struct TrapFrame *tf)
+itoa	src/lib/abort.c	/^itoa(int a) {$/;"	kind:function	file:	signature:(int a)
+machine	boot/boot.h	/^	unsigned short machine;$/;"	kind:member	struct:ELFHeader	access:public
+magic	boot/boot.h	/^	unsigned int   magic;$/;"	kind:member	struct:ELFHeader	access:public
+memsz	boot/boot.h	/^	unsigned int memsz;$/;"	kind:member	struct:ProgramHeader	access:public
+off	boot/boot.h	/^	unsigned int off;$/;"	kind:member	struct:ProgramHeader	access:public
+offset_15_0	include/x86/memory.h	/^	uint32_t offset_15_0      : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+offset_31_16	include/x86/memory.h	/^	uint32_t offset_31_16     : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+out_byte	boot/boot.h	/^out_byte(short port, char data) {$/;"	kind:function	signature:(short port, char data)
+out_byte	include/x86/io.h	/^out_byte(uint16_t port, int8_t data) {$/;"	kind:function	signature:(uint16_t port, int8_t data)
+pad0	include/x86/memory.h	/^	uint32_t pad0             : 8;$/;"	kind:member	struct:GateDescriptor	access:public
+paddr	boot/boot.h	/^	unsigned int paddr;$/;"	kind:member	struct:ProgramHeader	access:public
+phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	kind:member	struct:ELFHeader	access:public
+phnum	boot/boot.h	/^	unsigned short phnum;$/;"	kind:member	struct:ELFHeader	access:public
+phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	kind:member	struct:ELFHeader	access:public
+present	include/x86/memory.h	/^	uint32_t present          : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+privilege_level	include/x86/memory.h	/^	uint32_t privilege_level  : 2;$/;"	kind:member	struct:GateDescriptor	access:public
+putchar	src/device/serial.c	/^putchar(char ch) {$/;"	kind:function	signature:(char ch)
+readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	kind:function	signature:(void *dst, int offset)
+readseg	boot/main.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	kind:function	signature:(unsigned char *pa, int count, int offset)
+save_idt	include/x86/cpu.h	/^save_idt(void *addr, uint32_t size) {$/;"	kind:function	signature:(void *addr, uint32_t size)
+segment	include/x86/memory.h	/^	uint32_t segment          : 16;$/;"	kind:member	struct:GateDescriptor	access:public
+serial_idle	src/device/serial.c	/^serial_idle(void) {$/;"	kind:function	file:	signature:(void)
+set_intr	src/irq/idt.c	/^set_intr(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	kind:function	file:	signature:(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl)
+set_trap	src/irq/idt.c	/^set_trap(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	kind:function	file:	signature:(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl)
+shentsize	boot/boot.h	/^	unsigned short shentsize;$/;"	kind:member	struct:ELFHeader	access:public
+shnum	boot/boot.h	/^	unsigned short shnum;$/;"	kind:member	struct:ELFHeader	access:public
+shoff	boot/boot.h	/^	unsigned int   shoff;$/;"	kind:member	struct:ELFHeader	access:public
+shstrndx	boot/boot.h	/^	unsigned short shstrndx;$/;"	kind:member	struct:ELFHeader	access:public
+size_t	include/common/types.h	/^typedef unsigned int   size_t;$/;"	kind:typedef
+start	boot/start.S	/^start:$/;"	kind:label
+start32	boot/start.S	/^start32:$/;"	kind:label
+system	include/x86/memory.h	/^	uint32_t system           : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+type	boot/boot.h	/^	unsigned int type;$/;"	kind:member	struct:ProgramHeader	access:public
+type	boot/boot.h	/^	unsigned short type;$/;"	kind:member	struct:ELFHeader	access:public
+type	include/x86/memory.h	/^	uint32_t type             : 4;$/;"	kind:member	struct:GateDescriptor	access:public
+uint16_t	include/common/types.h	/^typedef unsigned short uint16_t;$/;"	kind:typedef
+uint32_t	include/common/types.h	/^typedef unsigned int   uint32_t;$/;"	kind:typedef
+uint8_t	include/common/types.h	/^typedef unsigned char  uint8_t;$/;"	kind:typedef
+vaddr	boot/boot.h	/^	unsigned int vaddr;$/;"	kind:member	struct:ProgramHeader	access:public
+version	boot/boot.h	/^	unsigned int   version;$/;"	kind:member	struct:ELFHeader	access:public
+wait_for_interrupt	include/x86/cpu.h	/^wait_for_interrupt() {$/;"	kind:function	signature:()
+waitdisk	boot/main.c	/^waitdisk(void) {$/;"	kind:function	signature:(void)
+xxx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public

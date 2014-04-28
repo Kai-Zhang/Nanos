@@ -23,3 +23,48 @@ putchar(char ch) {
 	out_byte(SERIAL_PORT, ch);
 }
 
+int printf (const char* format, ...) {
+	static char buf [30] = {0};
+	const char* str = format;
+	char* para = (char*)(&format + 1);
+	char* prt = NULL;
+	int count = 0; int dec = 0;
+
+	while (*str != 0) {
+		if (*str != '%') {
+			putchar (*str);
+			++ str;
+			++ count;
+			continue;
+		}
+		switch (*(++str)) {
+			case 'd':
+				dec = *((int*)para);
+				prt = buf + sizeof(buf) - 2;
+				do {
+					*--prt = '0' + dec % 10;
+				} while (dec /= 10);
+				for (; *prt; ++ prt) {
+					putchar (*prt);
+				}
+				para = (char*)((int*)para + 1);
+				break;
+			case 'c':
+				putchar (*para);
+				++ para;
+				break;
+			case 's':
+				prt = *((char**)para);
+				for (; *prt; ++ prt) {
+					putchar (*prt);
+				}
+				para = (char*)((char**)para + 1);
+				break;
+			default:
+				putchar (*str);
+		}
+		++ str;
+		++ count;
+	}
+	return count;
+}
