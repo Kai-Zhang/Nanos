@@ -19,7 +19,7 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('0' + code % 10);
 		putchar('\n');
 	} else {
-		assert(tf->irq == -1);
+		assert(tf->irq != -1);
 	}
 }
 
