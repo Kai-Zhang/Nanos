@@ -2,7 +2,7 @@
 #define __THREAD_H__
 #include "x86/memory.h"
 
-#define STK_SZ 8192
+#define STK_SZ 512
 #define THREAD_NUM 10
 
 struct Thread {
