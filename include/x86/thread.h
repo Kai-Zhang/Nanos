@@ -3,7 +3,7 @@
 #include "x86/memory.h"
 
 #define STK_SZ 8192
-#define THREAD_NUM 65
+#define THREAD_NUM 10
 
 struct Thread {
 	struct TrapFrame* tf;
