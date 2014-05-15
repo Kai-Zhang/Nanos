@@ -20,8 +20,10 @@ struct GateDescriptor {
 };
 
 struct TrapFrame {
+	int32_t lck;
 	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;
 	int32_t irq;
+	uint32_t eip, cs, eflags;
 };
 
 #endif

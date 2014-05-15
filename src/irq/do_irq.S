@@ -24,13 +24,16 @@
 # ！调用C编写的中断处理程序(见irq/irq_handle.c)！
 .globl asm_do_irq
 .extern irq_handle
+.extern lock_counter
+.extern current
 asm_do_irq:
 	pushal
-
+	pushl lock_counter
 	pushl %esp
 	call irq_handle
-	addl $4, %esp
-
+#	addl $4, %esp
+	movl current, %esp
+	popl lock_counter
 	popal
 	addl $4, %esp
 	iret

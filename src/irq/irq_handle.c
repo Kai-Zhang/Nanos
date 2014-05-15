@@ -1,10 +1,14 @@
 #include "x86.h"
 #include "device.h"
+#include "common.h"
 
 void
 irq_handle(struct TrapFrame *tf) {
 	if (tf->irq == 1000) {
 		putchar('.');
+		if (current != thread_stack || list_empty(&(current->runq))) {
+			current = list_entry(&(current->runq.next), Thread, runq);
+		}
 	} else if (tf->irq == 1001) {
 		uint32_t code = in_byte(0x60);
 		uint32_t val = in_byte(0x61);
@@ -15,7 +19,7 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('0' + code % 10);
 		putchar('\n');
 	} else {
-		assert(0);
+		assert(tf->irq == -1);
 	}
 }
 

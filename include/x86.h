@@ -5,5 +5,6 @@
 #include "x86/memory.h"
 #include "x86/io.h"
 #include "x86/irq.h"
+#include "x86/thread.h"
 
 #endif

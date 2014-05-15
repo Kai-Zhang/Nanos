@@ -41,10 +41,13 @@ GateDescriptor::segment	include/x86/memory.h	/^	uint32_t segment          : 16;$
 GateDescriptor::system	include/x86/memory.h	/^	uint32_t system           : 1;$/;"	kind:member	struct:GateDescriptor	access:public
 GateDescriptor::type	include/x86/memory.h	/^	uint32_t type             : 4;$/;"	kind:member	struct:GateDescriptor	access:public
 HZ	include/device/timer.h	4;"	kind:macro
+INIT_LIST_HEAD	include/common/list.h	29;"	kind:macro
 INTERRUPT_GATE_32	src/irq/idt.c	3;"	kind:macro	file:
 IRQ_SLAVE	src/irq/i8259.c	5;"	kind:macro	file:
 LD	Makefile	/^LD = ld$/;"	kind:macro
 LDFLAGS	Makefile	/^LDFLAGS = -melf_i386$/;"	kind:macro
+LIST_HEAD	include/common/list.h	26;"	kind:macro
+LIST_HEAD_INIT	include/common/list.h	24;"	kind:macro
 NR_IRQ	include/x86/cpu.h	34;"	kind:macro
 NR_SEGMENTS	include/x86/memory.h	7;"	kind:macro
 NULL	include/common/const.h	7;"	kind:macro
@@ -66,7 +69,7 @@ SEG_ASM	boot/asm.h	9;"	kind:macro
 SEG_KERNEL_CODE	include/x86/memory.h	8;"	kind:macro
 SEG_KERNEL_DATA	include/x86/memory.h	9;"	kind:macro
 SEG_NULLASM	boot/asm.h	5;"	kind:macro
-SERIAL_PORT	include/device/serial.h	5;"	kind:macro
+SERIAL_PORT	include/device/serial.h	6;"	kind:macro
 SFILES	Makefile	/^SFILES = $(shell find src\/ -name "*.S")$/;"	kind:macro
 TIMER_PORT	src/device/timer.c	6;"	kind:macro	file:
 TRAP_GATE_32	src/irq/idt.c	4;"	kind:macro	file:
@@ -86,11 +89,15 @@ __COMMON_H__	include/common.h	2;"	kind:macro
 __CONST_H__	include/common/const.h	2;"	kind:macro
 __DEVICE_H__	include/device.h	2;"	kind:macro
 __IRQ_H__	include/x86/irq.h	2;"	kind:macro
+__LIST_H__	include/common/list.h	2;"	kind:macro
 __TIMER_H__	include/device/timer.h	2;"	kind:macro
 __TYPES_H__	include/common/types.h	2;"	kind:macro
 __X86_CPU_H__	include/x86/cpu.h	2;"	kind:macro
 __X86_IO_H__	include/x86/io.h	2;"	kind:macro
 __X86_MEMORY_H__	include/x86/memory.h	2;"	kind:macro
+__list_add	include/common/list.h	/^static inline void __list_add(struct list_head *new,$/;"	kind:function	signature:(struct list_head *new, struct list_head *prev, struct list_head *next)
+__list_del	include/common/list.h	/^static inline void __list_del(struct list_head *prev, struct list_head *next)$/;"	kind:function	signature:(struct list_head *prev, struct list_head *next)
+__list_splice	include/common/list.h	/^static inline void __list_splice(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
 __x86_H__	include/x86.h	2;"	kind:macro
 abort	src/lib/abort.c	/^abort(const char *fname, int line) {$/;"	kind:function	signature:(const char *fname, int line)
 align	boot/boot.h	/^	unsigned int align;$/;"	kind:member	struct:ProgramHeader	access:public
@@ -131,9 +138,28 @@ int8_t	include/common/types.h	/^typedef          char  int8_t;$/;"	kind:typedef
 irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
 irq_handle	src/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	kind:function	signature:(struct TrapFrame *tf)
 itoa	src/lib/abort.c	/^itoa(int a) {$/;"	kind:function	file:	signature:(int a)
+list_add	include/common/list.h	/^static inline void list_add(struct list_head *new, struct list_head *head)$/;"	kind:function	signature:(struct list_head *new, struct list_head *head)
+list_add_tail	include/common/list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	kind:function	signature:(struct list_head *new, struct list_head *head)
+list_del	include/common/list.h	/^static inline void list_del(struct list_head *entry)$/;"	kind:function	signature:(struct list_head *entry)
+list_del_init	include/common/list.h	/^static inline void list_del_init(struct list_head *entry)$/;"	kind:function	signature:(struct list_head *entry)
+list_empty	include/common/list.h	/^static inline int list_empty(struct list_head *head)$/;"	kind:function	signature:(struct list_head *head)
+list_entry	include/common/list.h	189;"	kind:macro
+list_for_each	include/common/list.h	197;"	kind:macro
+list_for_each_entry	include/common/list.h	225;"	kind:macro
+list_for_each_entry_safe	include/common/list.h	237;"	kind:macro
+list_for_each_prev	include/common/list.h	205;"	kind:macro
+list_for_each_safe	include/common/list.h	215;"	kind:macro
+list_head	include/common/list.h	/^struct list_head {$/;"	kind:struct
+list_head::next	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::list_head	access:public
+list_head::prev	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::	access:public
+list_move	include/common/list.h	/^static inline void list_move(struct list_head *list, struct list_head *head)$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
+list_move_tail	include/common/list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
+list_splice	include/common/list.h	/^static inline void list_splice(struct list_head *list, struct list_head *head)$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
+list_splice_init	include/common/list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
 machine	boot/boot.h	/^	unsigned short machine;$/;"	kind:member	struct:ELFHeader	access:public
 magic	boot/boot.h	/^	unsigned int   magic;$/;"	kind:member	struct:ELFHeader	access:public
 memsz	boot/boot.h	/^	unsigned int memsz;$/;"	kind:member	struct:ProgramHeader	access:public
+next	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::list_head	access:public
 off	boot/boot.h	/^	unsigned int off;$/;"	kind:member	struct:ProgramHeader	access:public
 offset_15_0	include/x86/memory.h	/^	uint32_t offset_15_0      : 16;$/;"	kind:member	struct:GateDescriptor	access:public
 offset_31_16	include/x86/memory.h	/^	uint32_t offset_31_16     : 16;$/;"	kind:member	struct:GateDescriptor	access:public
@@ -145,6 +171,8 @@ phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	kind:member	struct:ELFHea
 phnum	boot/boot.h	/^	unsigned short phnum;$/;"	kind:member	struct:ELFHeader	access:public
 phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	kind:member	struct:ELFHeader	access:public
 present	include/x86/memory.h	/^	uint32_t present          : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+prev	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::	access:public
+printf	src/device/serial.c	/^int printf (const char* format, ...) {$/;"	kind:function	signature:(const char* format, ...)
 privilege_level	include/x86/memory.h	/^	uint32_t privilege_level  : 2;$/;"	kind:member	struct:GateDescriptor	access:public
 putchar	src/device/serial.c	/^putchar(char ch) {$/;"	kind:function	signature:(char ch)
 readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	kind:function	signature:(void *dst, int offset)
