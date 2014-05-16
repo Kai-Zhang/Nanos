@@ -14,9 +14,9 @@ init_thread(void) {
 	}
 	current = &thread_stack[0];
 	next = &thread_stack[1];
-	asm volatile ("movl %0, %%esp" :
-			: "a" (&(thread_stack[0].kstack[STK_SZ]))
-			: "%esp");
+//	asm volatile ("movl %0, %%esp" :
+//			: "a" (&(thread_stack[0].kstack[STK_SZ]))
+//			: "%esp");
 //	asm volatile ("movl %esp, %ebp");
 }
 
@@ -38,7 +38,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->edi = new_thread->tf->esi = 0;
 	new_thread->tf->irq = 1000;
 	new_thread->tf->eip = (uint32_t)entry;
-	new_thread->tf->cs = 0;
+	new_thread->tf->cs = 8;
 	new_thread->tf->eflags = 0x200;
 	unlock();
 	return new_thread;
