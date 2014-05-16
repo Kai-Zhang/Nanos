@@ -38,7 +38,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->edi = new_thread->tf->esi = 0;
 	new_thread->tf->irq = 1000;
 	new_thread->tf->eip = (uint32_t)entry;
-	new_thread->tf->cs = 8;
+	new_thread->tf->cs = 0;
 	new_thread->tf->eflags = 0x200;
 	unlock();
 	return new_thread;
