@@ -1,12 +1,12 @@
 #include "x86.h"
 #include "device.h"
 #include "common.h"
-
+void* tf1;
 void
 irq_handle(struct TrapFrame *tf) {
 	if (tf->irq == 1000) {
 		putchar('.');
-		current->tf = tf;
+		current->tf = tf1;
 		if (current != thread_stack || list_empty(&(current->runq))) {
 			current = list_entry(&(current->runq.next), Thread, runq);
 		}
