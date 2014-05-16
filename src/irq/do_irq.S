@@ -35,5 +35,5 @@ asm_do_irq:
 	movl (current), %esp
 	popl lock_counter
 	popal
-#	addl $4, %esp
+	addl $8, %esp
 	iret
