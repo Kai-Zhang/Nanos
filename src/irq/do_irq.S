@@ -26,12 +26,10 @@
 .extern irq_handle
 .extern lock_counter
 .extern current
-.extern tf1
 asm_do_irq:
 	pushal
 	pushl lock_counter
 	pushl %esp
-	movl %esp, tf1
 	call irq_handle
 	addl $4, %esp
 	movl (current), %esp
