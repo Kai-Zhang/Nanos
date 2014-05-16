@@ -24,7 +24,7 @@ Thread*
 create_kthread(void (*entry)(void)) {
 	lock();
 	Thread* new_thread = next;
-	list_add_tail(&(new_thread->runq), &(new_thread->runq));
+	list_add_tail(&(new_thread->runq), &(current->runq));
 	INIT_LIST_HEAD(&(new_thread->freeq));
 	for (next = &thread_stack[1];
 		!list_empty(&(next->runq)) || !list_empty(&(next->freeq));
