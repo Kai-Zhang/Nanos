@@ -34,7 +34,6 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->eax = new_thread->tf->ecx = 0;
 	new_thread->tf->edx = new_thread->tf->ebx = 0;
 	new_thread->tf->ebp = (uint32_t)(&(new_thread->kstack[STK_SZ]));
-	new_thread->tf->xxx = new_thread->tf->ebp;
 	new_thread->tf->edi = new_thread->tf->esi = 0;
 	new_thread->tf->irq = 1000;
 	new_thread->tf->eip = (uint32_t)entry;

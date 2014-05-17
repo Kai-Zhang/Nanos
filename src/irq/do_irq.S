@@ -31,7 +31,7 @@ asm_do_irq:
 	pushl lock_counter
 	pushl %esp
 	call irq_handle
-	addl $4, %esp
+#	addl $4, %esp
 	popl lock_counter
 	popal
 	movl (current), %esp
