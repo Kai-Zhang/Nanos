@@ -6,8 +6,8 @@ CC = gcc
 LD = ld
 CFLAGS = -m32 -march=i386 -static -MD -std=gnu89 -ggdb \
 		 -fno-builtin -fno-stack-protector -fno-omit-frame-pointer \
-		 -Wall -Werror -O1 -I./include
-ASFLAGS = -m32 -MD
+		 -Wall -Werror -O2 -I./include
+ASFLAGS = -ggdb -m32 -MD
 LDFLAGS = -melf_i386
 GITFLAGS = -q --author='tracer <tracer@njuoslab.org>' --no-verify --allow-empty
 QEMU = qemu-system-i386
@@ -35,6 +35,7 @@ play: kernel.img
 	$(QEMU) -serial stdio kernel.img
 
 debug: kernel.img
+	-@git commit -m "> debug" $(GITFLAGS) # KEEP IT
 	$(QEMU) -serial stdio -s -S kernel.img
 
 clean:
