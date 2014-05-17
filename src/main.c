@@ -20,9 +20,9 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
-	asm volatile ("movl %0, %%esp" :
-		: "a" (&(thread_stack[0].kstack[STK_SZ]))
-		: "%esp");
+//	asm volatile ("movl %0, %%esp" :
+//		: "a" (&(thread_stack[0].kstack[STK_SZ]))
+//		: "%esp");
 	enable_interrupt();
 	create_kthread(thread_a);
 	create_kthread(thread_b);
