@@ -2,8 +2,8 @@
 #define __THREAD_H__
 #include "x86/memory.h"
 
-#define STK_SZ 512
-#define THREAD_NUM 10
+#define STK_SZ 2048
+#define THREAD_NUM 65
 
 struct Thread {
 	struct TrapFrame* tf;

@@ -7,7 +7,7 @@ volatile int lock_counter;
 
 void
 init_thread(void) {
-	register int i = 0;
+	int i = 0;
 	for ( ; i < THREAD_NUM; ++i) {
 		INIT_LIST_HEAD(&(thread_stack[i].runq));
 		INIT_LIST_HEAD(&(thread_stack[i].freeq));
