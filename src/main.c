@@ -9,6 +9,8 @@ void thread_a (void) {
 		lock();	
 		putchar('a');
 		unlock();
+		sleep();
+		putchar('s');
 //		putchar('a');
 //		sleep();
 //		wakeup(b);
