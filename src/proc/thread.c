@@ -22,7 +22,7 @@ init_thread(void) {
 
 Thread*
 create_kthread(void (*entry)(void)) {
-//	lock();
+	lock();
 	Thread* new_thread = next;
 	list_add_tail(&(new_thread->runq), &(current->runq));
 	INIT_LIST_HEAD(&(new_thread->freeq));
@@ -39,15 +39,17 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->eip = (uint32_t)entry;
 	new_thread->tf->cs = 8;
 	new_thread->tf->eflags = 0x200;
-//	unlock();
+	unlock();
 	return new_thread;
 }
 
 void
 sleep(void) {
 	lock();
-	list_del_init(&(current->runq));
-	list_add_tail(&(current->freeq), &(sleeping->freeq));
+	if (!list_empty(&(current->runq))) {
+		list_del_init(&(current->runq));
+		list_add_tail(&(current->freeq), &(sleeping->freeq));
+	}
 	unlock();
 	asm volatile ("int $0x80");
 }
@@ -55,8 +57,10 @@ sleep(void) {
 void
 wakeup(Thread* t) {
 	lock();
-	list_del_init(&(t->freeq));
-	list_add_tail(&(t->runq), &(current->runq));
+	if (!list_empty(&(t->freeq))) {
+		list_del_init(&(t->freeq));
+		list_add_tail(&(t->runq), &(current->runq));
+	}
 	unlock();
 }
 
