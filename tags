@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ASFLAGS	Makefile	/^ASFLAGS = -m32 -MD$/;"	kind:macro
+ASFLAGS	Makefile	/^ASFLAGS = -ggdb -m32 -MD$/;"	kind:macro
 BLUE_SCREEN_TEXT	src/lib/abort.c	23;"	kind:macro	file:
 CC	Makefile	/^CC = gcc$/;"	kind:macro
 CFILES	Makefile	/^CFILES = $(shell find src\/ -name "*.c")$/;"	kind:macro
@@ -69,20 +69,32 @@ SEG_ASM	boot/asm.h	9;"	kind:macro
 SEG_KERNEL_CODE	include/x86/memory.h	8;"	kind:macro
 SEG_KERNEL_DATA	include/x86/memory.h	9;"	kind:macro
 SEG_NULLASM	boot/asm.h	5;"	kind:macro
-SERIAL_PORT	include/device/serial.h	6;"	kind:macro
+SERIAL_PORT	include/device/serial.h	7;"	kind:macro
 SFILES	Makefile	/^SFILES = $(shell find src\/ -name "*.S")$/;"	kind:macro
+STK_SZ	include/x86/thread.h	5;"	kind:macro
+THREAD_NUM	include/x86/thread.h	6;"	kind:macro
 TIMER_PORT	src/device/timer.c	6;"	kind:macro	file:
 TRAP_GATE_32	src/irq/idt.c	4;"	kind:macro	file:
 TRUE	include/common/const.h	4;"	kind:macro
+Thread	include/x86/thread.h	/^struct Thread {$/;"	kind:struct
+Thread	include/x86/thread.h	/^typedef struct Thread Thread;$/;"	kind:typedef	typeref:struct:Thread
+Thread::freeq	include/x86/thread.h	/^	struct list_head runq, freeq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::	access:public
+Thread::kstack	include/x86/thread.h	/^	char kstack[STK_SZ];$/;"	kind:member	struct:Thread	access:public
+Thread::runq	include/x86/thread.h	/^	struct list_head runq, freeq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::list_head	access:public
+Thread::tf	include/x86/thread.h	/^	struct TrapFrame* tf;$/;"	kind:member	struct:Thread	typeref:struct:Thread::TrapFrame	access:public
 TrapFrame	include/x86/memory.h	/^struct TrapFrame {$/;"	kind:struct
+TrapFrame::cs	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::eax	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::ebp	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::ebx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::ecx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::edi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::edx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::eflags	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::eip	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::esi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
+TrapFrame::lck	include/x86/memory.h	/^	int32_t lck;$/;"	kind:member	struct:TrapFrame	access:public
 TrapFrame::xxx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 __ASSERT_H__	include/common/assert.h	2;"	kind:macro
 __COMMON_H__	include/common.h	2;"	kind:macro
@@ -90,21 +102,26 @@ __CONST_H__	include/common/const.h	2;"	kind:macro
 __DEVICE_H__	include/device.h	2;"	kind:macro
 __IRQ_H__	include/x86/irq.h	2;"	kind:macro
 __LIST_H__	include/common/list.h	2;"	kind:macro
+__SERIAL_H__	include/device/serial.h	2;"	kind:macro
+__THREAD_H__	include/x86/thread.h	2;"	kind:macro
 __TIMER_H__	include/device/timer.h	2;"	kind:macro
 __TYPES_H__	include/common/types.h	2;"	kind:macro
 __X86_CPU_H__	include/x86/cpu.h	2;"	kind:macro
+__X86_H__	include/x86.h	2;"	kind:macro
 __X86_IO_H__	include/x86/io.h	2;"	kind:macro
 __X86_MEMORY_H__	include/x86/memory.h	2;"	kind:macro
 __list_add	include/common/list.h	/^static inline void __list_add(struct list_head *new,$/;"	kind:function	signature:(struct list_head *new, struct list_head *prev, struct list_head *next)
 __list_del	include/common/list.h	/^static inline void __list_del(struct list_head *prev, struct list_head *next)$/;"	kind:function	signature:(struct list_head *prev, struct list_head *next)
 __list_splice	include/common/list.h	/^static inline void __list_splice(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
-__x86_H__	include/x86.h	2;"	kind:macro
 abort	src/lib/abort.c	/^abort(const char *fname, int line) {$/;"	kind:function	signature:(const char *fname, int line)
 align	boot/boot.h	/^	unsigned int align;$/;"	kind:member	struct:ProgramHeader	access:public
 append	src/lib/abort.c	/^append(char **p, const char *str) {$/;"	kind:function	file:	signature:(char **p, const char *str)
 asm_do_irq	src/irq/do_irq.S	/^asm_do_irq:$/;"	kind:label
 assert	include/common/assert.h	7;"	kind:macro
 bootmain	boot/main.c	/^bootmain(void) {$/;"	kind:function	signature:(void)
+create_kthread	src/proc/thread.c	/^create_kthread(void (*entry)(void)) {$/;"	kind:function	signature:(void (*entry)(void))
+cs	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
+current	src/proc/thread.c	/^Thread *current, *next, *sleeping;$/;"	kind:variable
 disable_interrupt	include/x86/cpu.h	/^disable_interrupt(void) {$/;"	kind:function	signature:(void)
 display_message	src/lib/abort.c	/^display_message(const char *file, int line) {$/;"	kind:function	file:	signature:(const char *file, int line)
 eax	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
@@ -113,7 +130,9 @@ ebx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"
 ecx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 edi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
 edx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
+eflags	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
 ehsize	boot/boot.h	/^	unsigned short ehsize;$/;"	kind:member	struct:ELFHeader	access:public
+eip	include/x86/memory.h	/^	uint32_t eip, cs, eflags;$/;"	kind:member	struct:TrapFrame	access:public
 elf	boot/boot.h	/^	unsigned char  elf[12];$/;"	kind:member	struct:ELFHeader	access:public
 enable_interrupt	include/x86/cpu.h	/^enable_interrupt(void) {$/;"	kind:function	signature:(void)
 entry	boot/boot.h	/^	unsigned int   entry;$/;"	kind:member	struct:ELFHeader	access:public
@@ -122,8 +141,10 @@ esi	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"
 filesz	boot/boot.h	/^	unsigned int filesz;$/;"	kind:member	struct:ProgramHeader	access:public
 flags	boot/boot.h	/^	unsigned int   flags;$/;"	kind:member	struct:ELFHeader	access:public
 flags	boot/boot.h	/^	unsigned int flags;$/;"	kind:member	struct:ProgramHeader	access:public
+freeq	include/x86/thread.h	/^	struct list_head runq, freeq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::	access:public
 gdt	boot/start.S	/^gdt:$/;"	kind:label
 gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	kind:label
+grading	src/main.c	/^grading (void) {$/;"	kind:function	signature:(void)
 idt	src/irq/idt.c	/^struct GateDescriptor idt[NR_IRQ];$/;"	kind:variable	typeref:struct:GateDescriptor
 in_byte	boot/boot.h	/^in_byte(short port) {$/;"	kind:function	signature:(short port)
 in_byte	include/x86/io.h	/^in_byte(uint16_t port) {$/;"	kind:function	signature:(uint16_t port)
@@ -131,6 +152,7 @@ in_long	boot/boot.h	/^in_long(short port) {$/;"	kind:function	signature:(short p
 init_idt	src/irq/idt.c	/^void init_idt() {$/;"	kind:function
 init_intr	src/irq/i8259.c	/^init_intr(void) {$/;"	kind:function	signature:(void)
 init_serial	src/device/serial.c	/^init_serial(void) {$/;"	kind:function	signature:(void)
+init_thread	src/proc/thread.c	/^init_thread(void) {$/;"	kind:function	signature:(void)
 init_timer	src/device/timer.c	/^init_timer(void) {$/;"	kind:function	signature:(void)
 int16_t	include/common/types.h	/^typedef          short int16_t;$/;"	kind:typedef
 int32_t	include/common/types.h	/^typedef          int   int32_t;$/;"	kind:typedef
@@ -138,6 +160,8 @@ int8_t	include/common/types.h	/^typedef          char  int8_t;$/;"	kind:typedef
 irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
 irq_handle	src/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	kind:function	signature:(struct TrapFrame *tf)
 itoa	src/lib/abort.c	/^itoa(int a) {$/;"	kind:function	file:	signature:(int a)
+kstack	include/x86/thread.h	/^	char kstack[STK_SZ];$/;"	kind:member	struct:Thread	access:public
+lck	include/x86/memory.h	/^	int32_t lck;$/;"	kind:member	struct:TrapFrame	access:public
 list_add	include/common/list.h	/^static inline void list_add(struct list_head *new, struct list_head *head)$/;"	kind:function	signature:(struct list_head *new, struct list_head *head)
 list_add_tail	include/common/list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	kind:function	signature:(struct list_head *new, struct list_head *head)
 list_del	include/common/list.h	/^static inline void list_del(struct list_head *entry)$/;"	kind:function	signature:(struct list_head *entry)
@@ -156,10 +180,13 @@ list_move	include/common/list.h	/^static inline void list_move(struct list_head 
 list_move_tail	include/common/list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
 list_splice	include/common/list.h	/^static inline void list_splice(struct list_head *list, struct list_head *head)$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
 list_splice_init	include/common/list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
+lock	src/proc/thread.c	/^lock(void) {$/;"	kind:function	signature:(void)
+lock_counter	src/proc/thread.c	/^volatile int lock_counter;$/;"	kind:variable
 machine	boot/boot.h	/^	unsigned short machine;$/;"	kind:member	struct:ELFHeader	access:public
 magic	boot/boot.h	/^	unsigned int   magic;$/;"	kind:member	struct:ELFHeader	access:public
 memsz	boot/boot.h	/^	unsigned int memsz;$/;"	kind:member	struct:ProgramHeader	access:public
 next	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::list_head	access:public
+next	src/proc/thread.c	/^Thread *current, *next, *sleeping;$/;"	kind:variable
 off	boot/boot.h	/^	unsigned int off;$/;"	kind:member	struct:ProgramHeader	access:public
 offset_15_0	include/x86/memory.h	/^	uint32_t offset_15_0      : 16;$/;"	kind:member	struct:GateDescriptor	access:public
 offset_31_16	include/x86/memory.h	/^	uint32_t offset_31_16     : 16;$/;"	kind:member	struct:GateDescriptor	access:public
@@ -177,6 +204,7 @@ privilege_level	include/x86/memory.h	/^	uint32_t privilege_level  : 2;$/;"	kind:
 putchar	src/device/serial.c	/^putchar(char ch) {$/;"	kind:function	signature:(char ch)
 readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	kind:function	signature:(void *dst, int offset)
 readseg	boot/main.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	kind:function	signature:(unsigned char *pa, int count, int offset)
+runq	include/x86/thread.h	/^	struct list_head runq, freeq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::list_head	access:public
 save_idt	include/x86/cpu.h	/^save_idt(void *addr, uint32_t size) {$/;"	kind:function	signature:(void *addr, uint32_t size)
 segment	include/x86/memory.h	/^	uint32_t segment          : 16;$/;"	kind:member	struct:GateDescriptor	access:public
 serial_idle	src/device/serial.c	/^serial_idle(void) {$/;"	kind:function	file:	signature:(void)
@@ -187,17 +215,25 @@ shnum	boot/boot.h	/^	unsigned short shnum;$/;"	kind:member	struct:ELFHeader	acce
 shoff	boot/boot.h	/^	unsigned int   shoff;$/;"	kind:member	struct:ELFHeader	access:public
 shstrndx	boot/boot.h	/^	unsigned short shstrndx;$/;"	kind:member	struct:ELFHeader	access:public
 size_t	include/common/types.h	/^typedef unsigned int   size_t;$/;"	kind:typedef
+sleep	src/proc/thread.c	/^sleep(void) {$/;"	kind:function	signature:(void)
+sleeping	src/proc/thread.c	/^Thread *current, *next, *sleeping;$/;"	kind:variable
 start	boot/start.S	/^start:$/;"	kind:label
 start32	boot/start.S	/^start32:$/;"	kind:label
 system	include/x86/memory.h	/^	uint32_t system           : 1;$/;"	kind:member	struct:GateDescriptor	access:public
+tf	include/x86/thread.h	/^	struct TrapFrame* tf;$/;"	kind:member	struct:Thread	typeref:struct:Thread::TrapFrame	access:public
+thread_a	src/main.c	/^void thread_a (void) {$/;"	kind:function	signature:(void)
+thread_b	src/main.c	/^void thread_b (void) {$/;"	kind:function	signature:(void)
+thread_stack	src/proc/thread.c	/^Thread thread_stack[THREAD_NUM];$/;"	kind:variable
 type	boot/boot.h	/^	unsigned int type;$/;"	kind:member	struct:ProgramHeader	access:public
 type	boot/boot.h	/^	unsigned short type;$/;"	kind:member	struct:ELFHeader	access:public
 type	include/x86/memory.h	/^	uint32_t type             : 4;$/;"	kind:member	struct:GateDescriptor	access:public
 uint16_t	include/common/types.h	/^typedef unsigned short uint16_t;$/;"	kind:typedef
 uint32_t	include/common/types.h	/^typedef unsigned int   uint32_t;$/;"	kind:typedef
 uint8_t	include/common/types.h	/^typedef unsigned char  uint8_t;$/;"	kind:typedef
+unlock	src/proc/thread.c	/^unlock(void) {$/;"	kind:function	signature:(void)
 vaddr	boot/boot.h	/^	unsigned int vaddr;$/;"	kind:member	struct:ProgramHeader	access:public
 version	boot/boot.h	/^	unsigned int   version;$/;"	kind:member	struct:ELFHeader	access:public
 wait_for_interrupt	include/x86/cpu.h	/^wait_for_interrupt() {$/;"	kind:function	signature:()
 waitdisk	boot/main.c	/^waitdisk(void) {$/;"	kind:function	signature:(void)
+wakeup	src/proc/thread.c	/^wakeup(Thread* t) {$/;"	kind:function	signature:(Thread* t)
 xxx	include/x86/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	kind:member	struct:TrapFrame	access:public
