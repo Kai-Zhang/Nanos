@@ -23,6 +23,7 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('0' + code % 10);
 		putchar('\n');
 	} else {
+		printf("%d", tf->irq);
 		assert(tf->irq == -1);
 	}
 }
