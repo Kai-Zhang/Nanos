@@ -24,8 +24,8 @@ entry(void) {
 //		: "a" (&(thread_stack[0].kstack[STK_SZ]))
 //		: "%esp");
 	enable_interrupt();
-//	create_kthread(thread_a);
-//	create_kthread(thread_b);
+	create_kthread(thread_a);
+	create_kthread(thread_b);
 	while (1) {
 		wait_for_interrupt();
 	}
