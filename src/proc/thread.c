@@ -54,9 +54,9 @@ sleep(void) {
 	} else {
 		list_add_tail(&(current->freeq), &(sleeping->freeq));
 	}
+	running = list_entry(current->runq.next, Thread, runq);
 	list_del_init(&(current->runq));
 	current->is_sleeping = 1;
-	running = list_entry(current->runq.next, Thread, runq);
 	unlock();
 	asm volatile ("int $0x80");
 }
