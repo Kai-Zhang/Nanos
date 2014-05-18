@@ -60,6 +60,11 @@ void
 wakeup(Thread* t) {
 	lock();
 	if (!list_empty(&(t->freeq))) {
+		if (sleeping == t) {
+			sleeping = (Thread*)0;
+		} else {
+			sleeping = list_entry(t->freeq.next, Thread, freeq);
+		}
 		list_del_init(&(t->freeq));
 		list_add_tail(&(t->runq), &(current->runq));
 	}
