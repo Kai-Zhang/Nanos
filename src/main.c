@@ -2,14 +2,17 @@
 #include "x86.h"
 #include "device.h"
 void grading (void);
+static Thread *a, *b;
 void thread_a (void) {
 	while (1) {
 		putchar('a');
+		sleep();
 	}
 }
 void thread_b (void) {
 	while (1) {
 		putchar('b');
+		wakeup(a);
 	}
 }
 
@@ -23,8 +26,8 @@ entry(void) {
 //	asm volatile ("movl %0, %%esp" :
 //		: "a" (&(thread_stack[0].kstack[STK_SZ]))
 //		: "%esp");
-	create_kthread(thread_a);
-	create_kthread(thread_b);
+	a = create_kthread(thread_a);
+	b = create_kthread(thread_b);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
