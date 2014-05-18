@@ -17,7 +17,11 @@ void thread_b (void) {
 		sleep();
 	}
 }
-
+void thread_c (void) {
+	while (1) {
+		putchar('c');
+	}
+}
 void
 entry(void) {
 	init_timer();
@@ -30,6 +34,7 @@ entry(void) {
 //		: "%esp");
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
+	create_kthread(thread_c);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
