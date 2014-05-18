@@ -22,7 +22,7 @@ init_thread(void) {
 
 Thread*
 create_kthread(void (*entry)(void)) {
-	lock();
+//	lock();
 	Thread* new_thread = next;
 	list_add_tail(&(new_thread->runq), &(current->runq));
 	INIT_LIST_HEAD(&(new_thread->freeq));
@@ -40,7 +40,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->eip = (uint32_t)entry;
 	new_thread->tf->cs = 8;
 	new_thread->tf->eflags = 0x200;
-	unlock();
+//	unlock();
 	return new_thread;
 }
 
