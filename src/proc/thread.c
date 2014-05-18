@@ -29,7 +29,7 @@ create_kthread(void (*entry)(void)) {
 	for (next = &thread_stack[1];
 		!list_empty(&(next->runq)) || !list_empty(&(next->freeq));
 		++ next) ;
-	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ])) - sizeof(Thread));
+	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame));
 	new_thread->tf->lck = 0;
 	new_thread->tf->eax = new_thread->tf->ecx = 0;
 	new_thread->tf->edx = new_thread->tf->ebx = 0;
