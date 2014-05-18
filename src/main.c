@@ -6,7 +6,9 @@ static Thread *a, *b;
 void thread_a (void) {
 	while (1) {
 		lock();
+		
 		putchar('a');
+		unlock();
 //		putchar('a');
 //		sleep();
 //		wakeup(b);
