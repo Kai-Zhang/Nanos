@@ -23,7 +23,7 @@ struct TrapFrame {
 	int32_t lck;
 	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;
 	int32_t irq;
-	uint32_t eip, cs, eflags;
+	uint32_t err, eip, cs, eflags;
 };
 
 #endif
