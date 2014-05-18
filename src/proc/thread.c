@@ -46,7 +46,9 @@ create_kthread(void (*entry)(void)) {
 void
 sleep(void) {
 	lock();
-	if (!list_empty(&(current->runq))) {
+	if (sleeping == (Thread*)0) {
+		sleeping = current;
+	} else if (!list_empty(&(current->runq))) {
 		list_del_init(&(current->runq));
 		list_add_tail(&(current->freeq), &(sleeping->freeq));
 	}
