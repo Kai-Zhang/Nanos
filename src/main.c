@@ -7,12 +7,14 @@ void thread_a (void) {
 	while (1) {
 		putchar('a');
 		sleep();
+		wakeup(b);
 	}
 }
 void thread_b (void) {
 	while (1) {
 		putchar('b');
 		wakeup(a);
+		sleep();
 	}
 }
 
