@@ -48,6 +48,8 @@ sleep(void) {
 	lock();
 	if (sleeping == (Thread*)0) {
 		sleeping = current;
+		list_del_init(&(current->runq));
+		INIT_LIST_HEAD(&(current->freeq));
 	} else if (!list_empty(&(current->runq))) {
 		list_del_init(&(current->runq));
 		list_add_tail(&(current->freeq), &(sleeping->freeq));
