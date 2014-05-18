@@ -5,9 +5,11 @@ void grading (void);
 static Thread *a, *b;
 void thread_a (void) {
 	while (1) {
+		lock();
 		putchar('a');
-		sleep();
-		wakeup(b);
+//		putchar('a');
+//		sleep();
+//		wakeup(b);
 	}
 }
 void thread_b (void) {
