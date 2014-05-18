@@ -10,11 +10,12 @@ struct Thread {
 	struct TrapFrame* tf;
 	char kstack[STK_SZ];
 	struct list_head runq, freeq;
+	int is_sleeping;
 };
 typedef struct Thread Thread;
 
 extern Thread thread_stack[THREAD_NUM];
-extern Thread *current, *next, *sleeping;
+extern Thread *current, *running, *next, *sleeping;
 extern volatile int lock_counter;
 
 static inline void

@@ -2,7 +2,7 @@
 #include "common.h"
 
 Thread thread_stack[THREAD_NUM];
-Thread *current, *next, *sleeping;
+Thread *current, *running, *next, *sleeping;
 volatile int lock_counter;
 
 void
@@ -13,6 +13,7 @@ init_thread(void) {
 		INIT_LIST_HEAD(&(thread_stack[i].freeq));
 	}
 	current = &thread_stack[0];
+	running = current;
 	next = &thread_stack[1];
 //	asm volatile ("movl %0, %%esp" :
 //			: "a" (&(thread_stack[0].kstack[STK_SZ]))
@@ -39,6 +40,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->eip = (uint32_t)entry;
 	new_thread->tf->cs = 8;
 	new_thread->tf->eflags = 0x200;
+	new_thread->is_sleeping = 0;
 	unlock();
 	return new_thread;
 }
@@ -48,12 +50,13 @@ sleep(void) {
 	lock();
 	if (sleeping == (Thread*)0) {
 		sleeping = current;
-		list_del_init(&(current->runq));
 		INIT_LIST_HEAD(&(current->freeq));
-	} else if (!list_empty(&(current->runq))) {
-		list_del_init(&(current->runq));
+	} else {
 		list_add_tail(&(current->freeq), &(sleeping->freeq));
 	}
+	list_del_init(&(current->runq));
+	current->is_sleeping = 1;
+	running = list_entry(current->runq.next, Thread, runq);
 	unlock();
 	asm volatile ("int $0x80");
 }
@@ -61,14 +64,17 @@ sleep(void) {
 void
 wakeup(Thread* t) {
 	lock();
-	if (!list_empty(&(t->freeq))) {
+	if (t->is_sleeping) {
 		if (sleeping == t) {
-			sleeping = (Thread*)0;
-		} else {
-			sleeping = list_entry(t->freeq.next, Thread, freeq);
+			if (list_empty(&(sleeping->freeq))) {
+				sleeping = (Thread*)0;
+			} else {
+				sleeping = list_entry(t->freeq.next, Thread, freeq);
+			}
 		}
 		list_del_init(&(t->freeq));
 		list_add_tail(&(t->runq), &(current->runq));
+		t->is_sleeping = 0;
 	}
 	unlock();
 }
