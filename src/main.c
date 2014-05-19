@@ -24,7 +24,7 @@ void thread_a (void) {
 		putchar('a');
 		unlock();
 		for (i = 0; i < 10; ++i) {
-			wait_for_interrupt();
+			asm volatile ("nop");
 		}
 		sleep();
 	}
