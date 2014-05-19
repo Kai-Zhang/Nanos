@@ -1,5 +1,6 @@
 #include "x86.h"
 #include "common.h"
+#include "device.h"
 
 Thread thread_pool[THREAD_NUM];
 Thread *current, *running, *next, *sleeping;
@@ -96,6 +97,6 @@ unlock(void) {
 
 void
 stop_thread(void) {
-
+	putchar('h');
 }
 
