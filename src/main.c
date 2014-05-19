@@ -3,24 +3,37 @@
 #include "device.h"
 void grading (void);
 static Thread *a, *b;
+long long volatile counter = 0;
 void thread_a (void) {
+	int i=0;
+	for ( ;i < 100000000; ++i) {
+		++counter;
+	}
+	printf(  "%d  ", counter);
 	while (1) {
-		lock();
-		lock();
-		putchar('a');
-		unlock();
-		sleep();
-		putchar('s');
-		unlock();
+		wait_for_interrupt();
+//		lock();
+//		lock();
+//		putchar('a');
+//		unlock();
+//		sleep();
+//		putchar('s');
+//		unlock();
 //		putchar('a');
 //		sleep();
 //		wakeup(b);
 	}
 }
 void thread_b (void) {
+	int j=0;
+	for ( ;j < 1000000000; ++j) {
+		++counter;
+	}
+	printf("  %d  ", counter);
 	while (1) {
-		putchar('b');
-		wakeup(a);
+		wait_for_interrupt();
+	//	putchar('b');
+	//	wakeup(a);
 //		putchar('b');
 //		wakeup(a);
 //		sleep();
