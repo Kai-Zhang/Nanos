@@ -4,43 +4,20 @@
 void grading (void);
 static Thread *a, *b;
 long long volatile counter = 0;
+void thread_c(void);
 void thread_a (void) {
-//	while (1) {
-//		lock();
-//		lock();
-//		putchar('a');
-//		unlock();
-//		sleep();
-//		putchar('s');
-//		unlock();
-//		putchar('a');
-//		sleep();
-//		wakeup(b);
-//	}
 	int i = 0;
-	while (1) {
-		lock();
-		lock();
+	for ( ; i < 1000; ++i) {
 		putchar('a');
-		unlock();
-		for (i = 0; i < 10000000; ++i) {
-			asm volatile ("nop");
-		}
-		sleep();
 	}
+	return;
 }
 void thread_b (void) {
 	int i = 0;
-	while (1) {
-		for (i = 0; i < 100; ++i) {
-			putchar('b');
-		}
-		wakeup(a);
-	//	putchar('b');
-	//	wakeup(a);
-//		putchar('b');
-//		wakeup(a);
-//		sleep();
+	while (++i) {
+		putchar('b');
+		if (i == 10000)
+			create_kthread(thread_c);
 	}
 }
 void thread_c (void) {
