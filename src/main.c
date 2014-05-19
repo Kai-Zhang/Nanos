@@ -23,7 +23,7 @@ void thread_a (void) {
 		lock();
 		putchar('a');
 		unlock();
-		for (i = 0; i < 1000; ++i) {
+		for (i = 0; i < 10000000; ++i) {
 			asm volatile ("nop");
 		}
 		sleep();
