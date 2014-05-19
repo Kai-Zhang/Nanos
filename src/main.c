@@ -28,7 +28,7 @@ void thread_a (void) {
 void thread_b (void) {
 	int i = 0;
 	while (1) {
-		for ( ; i < 100; ++i) {
+		for ( i = 0; i < 100; ++i) {
 			putchar('b');
 		}
 		wakeup(a);
