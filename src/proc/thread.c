@@ -97,6 +97,6 @@ unlock(void) {
 
 void
 stop_thread(void) {
-	putchar('h');
+	putchar('c');
 }
 
