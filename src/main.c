@@ -23,7 +23,7 @@ void thread_a (void) {
 		lock();
 		putchar('a');
 		unlock();
-		for (i = 0; i < 100; ++i) {
+		for (i = 0; i < 10; ++i) {
 			wait_for_interrupt();
 		}
 		sleep();
