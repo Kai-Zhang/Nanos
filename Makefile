@@ -6,7 +6,7 @@ CC = gcc
 LD = ld
 CFLAGS = -m32 -march=i386 -static -MD -std=gnu89 -ggdb \
 		 -fno-builtin -fno-stack-protector -fno-omit-frame-pointer \
-		 -Wall -Werror -O2 -I./include
+		 -Wall -Werror -O0 -I./include
 ASFLAGS = -ggdb -m32 -MD
 LDFLAGS = -melf_i386
 GITFLAGS = -q --author='tracer <tracer@njuoslab.org>' --no-verify --allow-empty
