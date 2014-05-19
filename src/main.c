@@ -6,7 +6,7 @@ static Thread *a, *b;
 long long volatile counter = 0;
 void thread_a (void) {
 	int i=0;
-	for ( ;i < 1000000000; ++i) {
+	for ( ;i < 10000000; ++i) {
 		++counter;
 	}
 	printf(  "%d  ", counter);
@@ -26,7 +26,7 @@ void thread_a (void) {
 }
 void thread_b (void) {
 	int j=0;
-	for ( ;j < 1000000000; ++j) {
+	for ( ;j < 10000000; ++j) {
 		++counter;
 	}
 	printf("  %d  ", counter);
