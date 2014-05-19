@@ -5,13 +5,7 @@ void grading (void);
 static Thread *a, *b;
 long long volatile counter = 0;
 void thread_a (void) {
-	int i=0;
-	for ( ;i < 10000000; ++i) {
-		++counter;
-	}
-	printf(  "%d  ", counter);
-	while (1) {
-		wait_for_interrupt();
+//	while (1) {
 //		lock();
 //		lock();
 //		putchar('a');
@@ -22,14 +16,18 @@ void thread_a (void) {
 //		putchar('a');
 //		sleep();
 //		wakeup(b);
+//	}
+	int i=0;
+	for ( ; i < 100; ++i) {
+		putchar('a');
 	}
+	return;
 }
 void thread_b (void) {
 	int j=0;
-	for ( ;j < 10000000; ++j) {
-		++counter;
+	for ( ; j < 10000000; ++j) {
+		putchar('b');
 	}
-	printf("  %d  ", counter);
 	while (1) {
 		wait_for_interrupt();
 	//	putchar('b');
