@@ -100,7 +100,6 @@ stop_thread(void) {
 	lock();
 	list_del_init(&(current->runq));
 	INIT_LIST_HEAD(&(current->freeq));
-	unlock();
 	asm volatile ("int $0x80");
 }
 
