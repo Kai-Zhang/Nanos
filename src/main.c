@@ -58,10 +58,10 @@ entry(void) {
 //	asm volatile ("movl %0, %%esp" :
 //		: "a" (&(thread_stack[0].kstack[STK_SZ]))
 //		: "%esp");
+	enable_interrupt();
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
 //	create_kthread(thread_c);
-	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
 	}
