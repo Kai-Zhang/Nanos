@@ -17,15 +17,21 @@ void thread_a (void) {
 //		sleep();
 //		wakeup(b);
 //	}
-	int i=0;
-	for ( ; i < 100; ++i) {
+	while (1) {
+		lock();
+		lock();
 		putchar('a');
+		unlock();
+		sleep();
 	}
-	return;
 }
 void thread_b (void) {
+	int i = 0;
 	while (1) {
-		putchar('b');
+		for ( ; i < 100; ++i) {
+			putchar('b');
+		}
+		wakeup(a);
 	//	putchar('b');
 	//	wakeup(a);
 //		putchar('b');
@@ -50,7 +56,7 @@ entry(void) {
 //		: "%esp");
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
-	create_kthread(thread_c);
+//	create_kthread(thread_c);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
