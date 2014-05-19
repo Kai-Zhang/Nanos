@@ -30,7 +30,8 @@ create_kthread(void (*entry)(void)) {
 	for (next = &thread_pool[1];
 		!list_empty(&(next->runq)) || !list_empty(&(next->freeq));
 		++ next) ;
-	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame));
+	*((uint32_t*)&(new_thread->kstack[STK_SZ-1]) - sizeof(uint32_t) + 1) = (uint32_t)stop_thread;
+	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame) - sizeof(uint32_t));
 	new_thread->tf->lck = 0;
 	new_thread->tf->eax = new_thread->tf->ecx = 0;
 	new_thread->tf->edx = new_thread->tf->ebx = 0;
@@ -91,5 +92,10 @@ unlock(void) {
 	if (lock_counter <= 0) {
 		enable_interrupt();
 	}
+}
+
+void
+stop_thread(void) {
+
 }
 

@@ -34,6 +34,7 @@ void sleep(void);
 void wakeup(Thread* t);
 void lock(void);
 void unlock(void);
+void stop_thread(void);
 
 #endif
 
