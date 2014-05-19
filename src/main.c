@@ -17,18 +17,22 @@ void thread_a (void) {
 //		sleep();
 //		wakeup(b);
 //	}
+	int i = 0;
 	while (1) {
 		lock();
 		lock();
 		putchar('a');
 		unlock();
+		for (i = 0; i < 100; ++i) {
+			wait_for_interrupt();
+		}
 		sleep();
 	}
 }
 void thread_b (void) {
 	int i = 0;
 	while (1) {
-		for ( i = 0; i < 100; ++i) {
+		for (i = 0; i < 100; ++i) {
 			putchar('b');
 		}
 		wakeup(a);
