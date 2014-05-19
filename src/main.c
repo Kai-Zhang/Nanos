@@ -17,16 +17,12 @@ void thread_a (void) {
 //		sleep();
 //		wakeup(b);
 //	}
-	int flag = 0;
 	while (1) {
 		lock();
 		lock();
 		putchar('a');
 		unlock();
-		if (flag == 0) {
-			sleep();
-			flag = 1;
-		}
+		sleep();
 	}
 }
 void thread_b (void) {
