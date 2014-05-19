@@ -5,16 +5,25 @@ void grading (void);
 static Thread *a, *b;
 void thread_a (void) {
 	while (1) {
+		lock();
+		lock();
 		putchar('a');
+		unlock();
 		sleep();
-		wakeup(b);
+		putchar('s');
+		unlock();
+//		putchar('a');
+//		sleep();
+//		wakeup(b);
 	}
 }
 void thread_b (void) {
 	while (1) {
 		putchar('b');
 		wakeup(a);
-		sleep();
+//		putchar('b');
+//		wakeup(a);
+//		sleep();
 	}
 }
 void thread_c (void) {
@@ -34,7 +43,7 @@ entry(void) {
 //		: "%esp");
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
-	create_kthread(thread_c);
+	//create_kthread(thread_c);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
