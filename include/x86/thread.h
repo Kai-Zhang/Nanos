@@ -15,7 +15,7 @@ struct Thread {
 typedef struct Thread Thread;
 
 extern Thread thread_pool[THREAD_NUM];
-extern Thread *current, *running, *next, *sleeping;
+extern Thread *current, *free, *sleeping, *next;
 extern volatile int lock_counter;
 
 static inline void

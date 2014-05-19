@@ -8,7 +8,7 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('.');
 		current->tf = tf;
 		schedule();
-		running = current;
+		next = current;
 	} else if (tf->irq == 1001) {
 		uint32_t code = in_byte(0x60);
 		uint32_t val = in_byte(0x61);
@@ -21,10 +21,10 @@ irq_handle(struct TrapFrame *tf) {
 	} else if (tf->irq == -1) {
 		putchar('o');
 		current->tf = tf;
-		current = running;
+		current = next;
 	} else {
 		printf("  %d  ", tf->irq);
-		assert(tf->irq == -1);
+		assert(0);
 	}
 }
 
