@@ -97,8 +97,8 @@ unlock(void) {
 
 void
 stop_thread(void) {
-	while (1) {
-		putchar('c');
-	}
+	list_del_init(&(current->runq));
+	INIT_LIST_HEAD(&(current->freeq));
+	asm volatile ("int $0x80");
 }
 

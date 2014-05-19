@@ -2,10 +2,9 @@
 #include "x86.h"
 #include "device.h"
 void grading (void);
-static Thread *a/*, *b*/;
+static Thread *a, *b;
 long long volatile counter = 0;
 void thread_a (void) {
-	disable_interrupt();
 //	while (1) {
 //		lock();
 //		lock();
@@ -50,8 +49,8 @@ entry(void) {
 //		: "a" (&(thread_stack[0].kstack[STK_SZ]))
 //		: "%esp");
 	a = create_kthread(thread_a);
-//	b = create_kthread(thread_b);
-	//create_kthread(thread_c);
+	b = create_kthread(thread_b);
+	create_kthread(thread_c);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
