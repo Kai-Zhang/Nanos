@@ -24,12 +24,8 @@ void thread_a (void) {
 	return;
 }
 void thread_b (void) {
-	int j=0;
-	for ( ; j < 10000000; ++j) {
-		putchar('b');
-	}
 	while (1) {
-		wait_for_interrupt();
+		putchar('b');
 	//	putchar('b');
 	//	wakeup(a);
 //		putchar('b');
