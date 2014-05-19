@@ -14,16 +14,16 @@ struct Thread {
 };
 typedef struct Thread Thread;
 
-extern Thread thread_stack[THREAD_NUM];
+extern Thread thread_pool[THREAD_NUM];
 extern Thread *current, *running, *next, *sleeping;
 extern volatile int lock_counter;
 
 static inline void
 schedule(void) {
-	if (current != thread_stack || !list_empty(&(current->runq))) {
+	if (current != thread_pool || !list_empty(&(current->runq))) {
 		current = list_entry(current->runq.next, Thread, runq);
 	}
-	if (current == thread_stack && !list_empty(&(current->runq))) {
+	if (current == thread_pool && !list_empty(&(current->runq))) {
 		current = list_entry(current->runq.next, Thread, runq);
 	}
 }

@@ -1,7 +1,7 @@
 #include "x86.h"
 #include "common.h"
 
-Thread thread_stack[THREAD_NUM];
+Thread thread_pool[THREAD_NUM];
 Thread *current, *running, *next, *sleeping;
 volatile int lock_counter;
 
@@ -9,14 +9,14 @@ void
 init_thread(void) {
 	int i = 0;
 	for ( ; i < THREAD_NUM; ++i) {
-		INIT_LIST_HEAD(&(thread_stack[i].runq));
-		INIT_LIST_HEAD(&(thread_stack[i].freeq));
+		INIT_LIST_HEAD(&(thread_pool[i].runq));
+		INIT_LIST_HEAD(&(thread_pool[i].freeq));
 	}
-	current = &thread_stack[0];
+	current = &thread_pool[0];
 	running = current;
-	next = &thread_stack[1];
+	next = &thread_pool[1];
 //	asm volatile ("movl %0, %%esp" :
-//			: "a" (&(thread_stack[0].kstack[STK_SZ]))
+//			: "a" (&(thread_pool[0].kstack[STK_SZ]))
 //			: "%esp");
 //	asm volatile ("movl %esp, %ebp");
 }
@@ -27,7 +27,7 @@ create_kthread(void (*entry)(void)) {
 	Thread* new_thread = next;
 	list_add_tail(&(new_thread->runq), &(current->runq));
 	INIT_LIST_HEAD(&(new_thread->freeq));
-	for (next = &thread_stack[1];
+	for (next = &thread_pool[1];
 		!list_empty(&(next->runq)) || !list_empty(&(next->freeq));
 		++ next) ;
 	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame));
