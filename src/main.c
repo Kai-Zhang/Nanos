@@ -3,27 +3,31 @@
 #include "device.h"
 void grading (void);
 static Thread *a, *b;
-long long volatile counter = 0;
-void thread_c(void);
 void thread_a (void) {
-	int i = 0;
-	for ( ; i < 1000; ++i) {
+	lock();
+	putchar('a');
+	sleep();
+	while (1) {
 		putchar('a');
 	}
-	return;
+	assert(0);
 }
 void thread_b (void) {
 	int i = 0;
-	while (++i) {
+	for ( ; i < 1000; ++i) {
 		putchar('b');
-		if (i == 10000)
-			create_kthread(thread_c);
 	}
+	wakeup(b);
+	while (1) {
+		putchar('b');
+	}
+	assert(0);
 }
 void thread_c (void) {
 	while (1) {
 		putchar('c');
 	}
+	assert(0);
 }
 void
 entry(void) {
@@ -32,13 +36,9 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
-//	asm volatile ("movl %0, %%esp" :
-//		: "a" (&(thread_stack[0].kstack[STK_SZ]))
-//		: "%esp");
 	enable_interrupt();
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
-//	create_kthread(thread_c);
 	while (1) {
 		wait_for_interrupt();
 	}
