@@ -21,6 +21,7 @@ void thread_c (void) {
 	}
 	assert(0);
 }
+char string[] = "It all begins.";
 void
 entry(void) {
 	init_timer();
@@ -28,7 +29,7 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
-	printf("%s", "It all begins.");
+	printf("%s", string);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
