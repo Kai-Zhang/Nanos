@@ -21,7 +21,6 @@ void thread_c (void) {
 	}
 	assert(0);
 }
-char string[] = "It all begins.";
 void
 entry(void) {
 	init_timer();
@@ -29,10 +28,8 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
-	while (2) {
-	printf("%s", string);
-	}
 	enable_interrupt();
+	create_kthread(grading);
 	while (1) {
 		wait_for_interrupt();
 	}
