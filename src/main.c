@@ -2,7 +2,6 @@
 #include "x86.h"
 #include "device.h"
 void grading (void);
-static Thread *a, *b;
 void thread_a (void) {
 	int i = 0;
 	for ( ; i < 100; ++i) {
@@ -30,8 +29,6 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
-	a = create_kthread(thread_a);
-	b = create_kthread(thread_b);
 	while (1) {
 		wait_for_interrupt();
 	}
