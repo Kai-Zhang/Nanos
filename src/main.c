@@ -14,7 +14,7 @@ void thread_a (void) {
 }
 void thread_b (void) {
 	int i = 0;
-	for ( ; i < 1000; ++i) {
+	for ( ; i < 10; ++i) {
 		putchar('b');
 	}
 	wakeup(b);
