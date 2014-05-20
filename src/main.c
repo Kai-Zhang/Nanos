@@ -29,7 +29,9 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
+	while (2) {
 	printf("%s", string);
+	}
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
