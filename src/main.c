@@ -17,7 +17,7 @@ void thread_b (void) {
 	for ( ; i < 10; ++i) {
 		putchar('b');
 	}
-	wakeup(b);
+	wakeup(a);
 	while (1) {
 		putchar('b');
 	}
@@ -39,6 +39,7 @@ entry(void) {
 	enable_interrupt();
 	a = create_kthread(thread_a);
 	b = create_kthread(thread_b);
+	create_kthread(thread_c);
 	while (1) {
 		wait_for_interrupt();
 	}
