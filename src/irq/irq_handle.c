@@ -24,7 +24,7 @@ irq_handle(struct TrapFrame *tf) {
 		current = next;
 	} else {
 		printf("  %d  ", tf->irq);
-		assert(0);
+//		assert(0);
 	}
 }
 
