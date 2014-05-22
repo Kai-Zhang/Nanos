@@ -54,11 +54,11 @@ entry(void) {
 	init_intr();
 	init_serial();
 	init_thread();
+	enable_interrupt();
 	PCB_of_thread_A = create_kthread(A);
 	PCB_of_thread_B = create_kthread(B);
 	PCB_of_thread_C = create_kthread(C);
 	PCB_of_thread_D = create_kthread(D);
-	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
 	}
