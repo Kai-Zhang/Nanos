@@ -2,7 +2,51 @@
 #include "x86.h"
 #include "device.h"
 void grading (void);
-
+Thread *PCB_of_thread_A, *PCB_of_thread_B, *PCB_of_thread_C, *PCB_of_thread_D;
+void A () { 
+    int x = 0;
+    while(1) {
+        if(x % 100000 == 0) {
+            printf("a");
+            wakeup(PCB_of_thread_B);
+            sleep();
+        }
+        x ++;
+    }
+}
+void B () { 
+    int x = 0;
+    while(1) {
+        if(x % 100000 == 0) {
+            printf("b");
+            wakeup(PCB_of_thread_C);
+            sleep();
+        }
+        x ++;
+    }
+}
+void C () { 
+    int x = 0;
+    while(1) {
+        if(x % 100000 == 0) {
+            printf("c");
+            wakeup(PCB_of_thread_D);
+            sleep();
+        }
+        x ++;
+    }
+}
+void D () { 
+    int x = 0;
+    while(1) {
+        if(x % 100000 == 0) {
+            printf("d");
+            wakeup(PCB_of_thread_A);
+            sleep();
+        }
+        x ++;
+    }
+}
 void
 entry(void) {
 	init_timer();
@@ -11,7 +55,10 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
-	create_kthread(grading);
+	PCB_of_thread_A = create_kthread(A);
+	PCB_of_thread_B = create_kthread(B);
+	PCB_of_thread_C = create_kthread(C);
+	PCB_of_thread_D = create_kthread(D);
 	while (1) {
 		wait_for_interrupt();
 	}

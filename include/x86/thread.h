@@ -4,7 +4,7 @@
 #include "common/list.h"
 
 #define STK_SZ 2048
-#define THREAD_NUM 65
+#define THREAD_NUM 66
 
 struct Thread {
 	struct TrapFrame* tf;
