@@ -63,13 +63,6 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
-	char str[1000] = "Hello";
-	printf("%s is a string", str);
-	assert(0);
-	PCB_of_thread_A = create_kthread(A);
-	PCB_of_thread_B = create_kthread(B);
-	PCB_of_thread_C = create_kthread(C);
-	PCB_of_thread_D = create_kthread(D);
 	while (1) {
 		wait_for_interrupt();
 	}
@@ -79,5 +72,9 @@ entry(void) {
 
 void
 grading (void) {
-	
+	PCB_of_thread_A = create_kthread(A);
+	PCB_of_thread_B = create_kthread(B);
+	PCB_of_thread_C = create_kthread(C);
+	PCB_of_thread_D = create_kthread(D);
+		
 }
