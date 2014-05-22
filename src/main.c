@@ -63,7 +63,7 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
-	char str[100] = "Hello";
+	char str[1000] = "Hello";
 	printf("%s is a string", str);
 	assert(0);
 	PCB_of_thread_A = create_kthread(A);
