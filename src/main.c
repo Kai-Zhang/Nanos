@@ -63,6 +63,7 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
+	create_kthread(grading);
 	while (1) {
 		wait_for_interrupt();
 	}
