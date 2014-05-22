@@ -10,6 +10,7 @@ irq_handle(struct TrapFrame *tf) {
 		schedule();
 		next = current;
 	} else if (tf->irq == 1001) {
+		current->tf = tf;
 		uint32_t code = in_byte(0x60);
 		uint32_t val = in_byte(0x61);
 		out_byte(0x61, val | 0x80);
