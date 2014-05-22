@@ -31,7 +31,7 @@ create_kthread(void (*entry)(void)) {
 	free = list_entry(free->freeq.next, Thread, freeq);
 	list_add_tail(&(new_thread->runq), &(current->runq));
 	list_del_init(&(new_thread->freeq));
-	return_pointer = (uint32_t*)(new_thread->kstack + STK_SZ - sizeof(uint32_t) + 1);
+	return_pointer = (uint32_t*)(&(new_thread->kstack[STK_SZ-1]) - sizeof(uint32_t) + 1);
 	*return_pointer = (uint32_t)stop_thread;
 //	*(uint32_t*)(&(new_thread->kstack[STK_SZ-1]) - sizeof(uint32_t) + 1) = (uint32_t)stop_thread;
 	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame) - sizeof(uint32_t) + 1);
