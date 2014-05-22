@@ -7,9 +7,11 @@ void A () {
     int x = 0;
     while(1) {
         if(x % 100000 == 0) {
+			lock();
             printf("a");
             wakeup(PCB_of_thread_B);
             sleep();
+			unlock();
         }
         x ++;
     }
@@ -18,9 +20,11 @@ void B () {
     int x = 0;
     while(1) {
         if(x % 100000 == 0) {
+			lock();
             printf("b");
             wakeup(PCB_of_thread_C);
             sleep();
+			unlock();
         }
         x ++;
     }
@@ -29,9 +33,11 @@ void C () {
     int x = 0;
     while(1) {
         if(x % 100000 == 0) {
+			lock();
             printf("c");
             wakeup(PCB_of_thread_D);
             sleep();
+			unlock();
         }
         x ++;
     }
@@ -40,9 +46,11 @@ void D () {
     int x = 0;
     while(1) {
         if(x % 100000 == 0) {
+			lock();
             printf("d");
             wakeup(PCB_of_thread_A);
             sleep();
+			unlock();
         }
         x ++;
     }
