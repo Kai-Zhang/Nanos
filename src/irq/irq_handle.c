@@ -5,7 +5,6 @@
 void
 irq_handle(struct TrapFrame *tf) {
 	if (tf->irq == 1000) {
-		putchar('.');
 		current->tf = tf;
 		schedule();
 		next = current;
@@ -20,7 +19,6 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('0' + code % 10);
 		putchar('\n');
 	} else if (tf->irq == 0x80) {
-		putchar('o');
 		current->tf = tf;
 		current = next;
 	} else {
