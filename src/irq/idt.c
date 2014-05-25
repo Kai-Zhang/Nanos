@@ -75,6 +75,7 @@ void init_idt() {
 	set_trap(idt + 11, SEG_KERNEL_CODE, (uint32_t)vec11, DPL_KERNEL);
 	set_trap(idt + 12, SEG_KERNEL_CODE, (uint32_t)vec12, DPL_KERNEL);
 	set_trap(idt + 13, SEG_KERNEL_CODE, (uint32_t)vec13, DPL_KERNEL);
+	/* 设置0x80软中断调用的中断处理 */
 	set_trap(idt + 0x80, SEG_KERNEL_CODE, (uint32_t)vec128, DPL_KERNEL);
 
 	/* 设置外部中断的处理 */
