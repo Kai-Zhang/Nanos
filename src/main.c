@@ -13,7 +13,8 @@ entry(void) {
 	enable_interrupt();
 //	create_kthread(grading);
 	while (1) {
-		wait_for_interrupt();
+		asm volatile ("int $0x80");
+//		wait_for_interrupt();
 	}
 	assert(0);
 }
