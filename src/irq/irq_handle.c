@@ -19,7 +19,7 @@ irq_handle(struct TrapFrame *tf) {
 		putchar('0' + code / 10 % 10);
 		putchar('0' + code % 10);
 		putchar('\n');
-	} else if (tf->irq == -1) {
+	} else if (tf->irq == 0x80) {
 		putchar('o');
 		current->tf = tf;
 		current = next;
