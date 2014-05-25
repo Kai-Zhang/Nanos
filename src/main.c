@@ -21,7 +21,7 @@ void A(void) {
 void B(void) {
 	int i = 0;
 	while (1) {
-		if (i % 100000 == 0) {
+		if (i % 10000 == 0) {
 			putchar('b');
 			if (i == 300000) {
 				wakeup(a);
