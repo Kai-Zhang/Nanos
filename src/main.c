@@ -11,10 +11,10 @@ entry(void) {
 	init_serial();
 	init_thread();
 	enable_interrupt();
-//	create_kthread(grading);
+	create_kthread(grading);
 	while (1) {
 		asm volatile ("int $0x80");
-//		wait_for_interrupt();
+		wait_for_interrupt();
 	}
 	assert(0);
 }
