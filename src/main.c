@@ -10,7 +10,7 @@ void A(void) {
 	while (1) {
 		if (i % 100000 == 0) {
 			putchar('a');
-			if (i == 200000) {
+			if (i % 200000 == 0) {
 				sleep();
 			}
 		}
@@ -23,7 +23,7 @@ void B(void) {
 	while (1) {
 		if (i % 10000 == 0) {
 			putchar('b');
-			if (i == 300000) {
+			if (i % 300000 == 0) {
 				wakeup(a);
 			}
 		}
