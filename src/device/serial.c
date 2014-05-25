@@ -43,45 +43,50 @@ int printf (const char* format, ...) {
 				integer = *((uint32_t*)para);
 				if ((int)integer < 0) {
 					putchar ('-');
+					++ count;
 					integer = (~integer) + 1;
 				}
-				print = buf + sizeof(buf) - 2;
+				print = buf + sizeof(buf) - 1;
 				do {
 					*--print = '0' + integer % 10;
 				} while (integer /= 10);
 				for (; *print; ++ print) {
 					putchar (*print);
+					++ count;
 				}
 				para += 4; 
 				break;
 			case 'x':
 				integer = *((uint32_t*)para);
-				print = buf + sizeof(buf) - 2;
+				print = buf + sizeof(buf) - 1;
 				do {
 					*--print = (integer % 16 < 10) ?
 								'0' + integer % 16 : 'a' + integer % 16 - 10;
 				} while (integer >>= 4);
 				for (; *print; ++ print) {
 					putchar (*print);
+					++ count;
 				}
 				para += 4;
 				break;
 			case 'c':
 				putchar (*para);
+				++ count;
 				para += 4;
 				break;
 			case 's':
 				print = *((char**)para);
 				for (; *print; ++ print) {
 					putchar (*print);
+					++ count;
 				}
 				para += 4;
 				break;
 			default:
 				putchar (*str);
+				++ count;
 		}
 		++ str;
-		++ count;
 	}
 	return count;
 }
