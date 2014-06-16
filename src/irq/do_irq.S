@@ -29,12 +29,10 @@
 .extern current
 asm_do_irq:
 	pushal
-	pushl lock_counter
 	pushl %esp
 	call irq_handle
 	movl current, %eax
 	movl (%eax), %esp
-	popl lock_counter
 	popal
 	addl $4, %esp
 	iret

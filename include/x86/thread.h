@@ -1,6 +1,7 @@
 #ifndef __THREAD_H__
 #define __THREAD_H__
 #include "x86/memory.h"
+#include "x86/cpu.h"
 #include "common/list.h"
 
 #define STK_SZ 2048
@@ -9,14 +10,14 @@
 struct Thread {
 	struct TrapFrame* tf;
 	char kstack[STK_SZ];
-	struct list_head runq, freeq;
+	struct list_head runq, freeq, semq;
 	int is_sleeping;
+	int lock_counter;
 };
 typedef struct Thread Thread;
 
 extern Thread thread_pool[THREAD_NUM];
 extern Thread *current, *free, *sleeping, *next;
-extern volatile int lock_counter;
 
 static inline void
 schedule(void) {
@@ -32,9 +33,21 @@ void init_thread(void);
 Thread* create_kthread(void (*entry)(void));
 void sleep(void);
 void wakeup(Thread* t);
-void lock(void);
-void unlock(void);
 void stop_thread(void);
+
+static inline void
+lock(void) {
+	disable_interrupt();
+	++ current->lock_counter;
+}
+
+static inline void
+unlock(void) {
+	-- current->lock_counter;
+	if (current->lock_counter <= 0) {
+		enable_interrupt();
+	}
+}
 
 #endif
 

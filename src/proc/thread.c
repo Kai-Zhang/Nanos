@@ -33,9 +33,7 @@ create_kthread(void (*entry)(void)) {
 	list_del_init(&(new_thread->freeq));
 	return_pointer = (uint32_t*)(&(new_thread->kstack[STK_SZ-1]) - sizeof(uint32_t) + 1);
 	*return_pointer = (uint32_t)stop_thread;
-//	*(uint32_t*)(&(new_thread->kstack[STK_SZ-1]) - sizeof(uint32_t) + 1) = (uint32_t)stop_thread;
 	new_thread->tf = (struct TrapFrame*)((char*)(&(new_thread->kstack[STK_SZ-1])) - sizeof(struct TrapFrame) - sizeof(uint32_t) + 1);
-	new_thread->tf->lck = 0;
 	new_thread->tf->eax = new_thread->tf->ecx = 0;
 	new_thread->tf->edx = new_thread->tf->ebx = 0;
 	new_thread->tf->ebp = (uint32_t)(&(new_thread->kstack[STK_SZ]));
@@ -45,6 +43,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->cs = 8;
 	new_thread->tf->eflags = 0x200;
 	new_thread->is_sleeping = 0;
+	new_thread->lock_counter = 0;
 	unlock();
 	return new_thread;
 }
@@ -81,20 +80,6 @@ wakeup(Thread* t) {
 		t->is_sleeping = 0;
 	}
 	unlock();
-}
-
-void
-lock(void) {
-	disable_interrupt();
-	++ lock_counter;
-}
-
-void
-unlock(void) {
-	-- lock_counter;
-	if (lock_counter <= 0) {
-		enable_interrupt();
-	}
 }
 
 void

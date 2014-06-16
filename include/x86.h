@@ -6,5 +6,6 @@
 #include "x86/io.h"
 #include "x86/irq.h"
 #include "x86/thread.h"
+#include "x86/sem.h"
 
 #endif
