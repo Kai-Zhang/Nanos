@@ -7,5 +7,6 @@
 #include "x86/irq.h"
 #include "x86/thread.h"
 #include "x86/sem.h"
+#include "x86/message.h"
 
 #endif

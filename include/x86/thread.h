@@ -7,7 +7,6 @@
 
 #define STK_SZ 2048
 #define THREAD_NUM 66
-typedef uint32_t pid_t;
 
 struct Thread {
 	struct TrapFrame* tf;

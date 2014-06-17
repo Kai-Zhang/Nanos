@@ -23,7 +23,7 @@ putchar(char ch) {
 	out_byte(SERIAL_PORT, ch);
 }
 
-int printf (const char* format, ...) {
+int printk (const char* format, ...) {
 	static char buf [30] = {0};
 	const char* str = format;
 	uint8_t* para = (uint8_t*)(&format + 1);
