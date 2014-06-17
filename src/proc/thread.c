@@ -11,15 +11,18 @@ init_thread(void) {
 	current = &thread_pool[0];
 	INIT_LIST_HEAD(&(thread_pool[0].runq));
 	INIT_LIST_HEAD(&(thread_pool[0].freeq));
+	thread_pool[0].pid = 0;
 
 	free = &thread_pool[1];
 	INIT_LIST_HEAD(&(thread_pool[1].runq));
 	INIT_LIST_HEAD(&(thread_pool[1].freeq));
+	thread_pool[1].pid = 1;
 
 	int i = 2;
 	for ( ; i < THREAD_NUM; ++i) {
 		INIT_LIST_HEAD(&(thread_pool[i].runq));
 		list_add_tail(&(thread_pool[i].freeq), &(free->freeq));
+		thread_pool[i].pid = i;
 	}
 }
 

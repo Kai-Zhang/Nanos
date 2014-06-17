@@ -3,14 +3,17 @@
 #include "x86/memory.h"
 #include "x86/cpu.h"
 #include "common/list.h"
+#include "common/types.h"
 
 #define STK_SZ 2048
 #define THREAD_NUM 66
+typedef uint32_t pid_t;
 
 struct Thread {
 	struct TrapFrame* tf;
 	char kstack[STK_SZ];
 	struct list_head runq, freeq, semq;
+	pid_t pid;
 	int is_sleeping;
 	int lock_counter;
 };
