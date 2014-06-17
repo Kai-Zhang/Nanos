@@ -27,6 +27,7 @@ typedef struct Device Device;
 size_t dev_read(Device *dev, off_t offset, void *buf, size_t count);
 size_t dev_write(Device *dev, off_t offset, void *buf, size_t count);
 
+void init_hal(void);
 void hal_register(const char *name, pid_t pid, int dev_id);
 Device *hal_get(const char *name);
 void hal_list(void);

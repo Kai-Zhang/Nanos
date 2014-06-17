@@ -3,7 +3,6 @@
 
 pid_t TTY;
 
-void init_tty(void);
 void ttyd(void);
 void send_keymsg(void);
 

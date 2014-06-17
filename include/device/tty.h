@@ -29,6 +29,7 @@ extern Console ttys[];
 extern const char *ttynames[];
 extern Console *current_consl;
 
+void init_tty(void);
 void consl_sync(Console *c);
 void consl_writec(Console *c, char ch);
 void consl_feed(Console *c, int key);
