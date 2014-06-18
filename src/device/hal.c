@@ -63,7 +63,7 @@ hal_get(const char *name) {
 static size_t
 dev_rw(int type, Device *dev, off_t offset, void *buf, size_t count) {
 	DevMessage m;
-	assert(sizeof(DevMessage) <= sizeof(Message)); // Message结构体不能定义得太小
+//	assert(sizeof(DevMessage) <= sizeof(Message)); // Message结构体不能定义得太小
 	m.header.type = type;
 	m.dev_id = dev->dev_id;
 	m.offset = offset;

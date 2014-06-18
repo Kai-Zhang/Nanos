@@ -5,7 +5,7 @@
 #include "common/list.h"
 #include "common/types.h"
 
-#define STK_SZ 2048
+#define STK_SZ 1024
 #define THREAD_NUM 66
 
 struct Thread {

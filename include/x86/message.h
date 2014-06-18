@@ -2,19 +2,22 @@
 #define __X86_MESSAGE_H__
 #include "common/types.h"
 
+#define ANY -1
+#define MSG_SZ 2048
+
 struct MsgHead {
 	int type;
-	int src;
+	pid_t src, dest;
 };
 typedef struct MsgHead MsgHead;
 
 struct Message {
 	int type;
-	int src;
+	pid_t src, dest;
+	char payload[MSG_SZ];
 };
 typedef struct Message Message;
 
-#define ANY -1
 #define MSG_HWINTR 0
 int send(pid_t, Message*);
 int receive(pid_t, Message*);
