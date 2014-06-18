@@ -2,6 +2,7 @@
 #include "common.h"
 #include "x86/io.h"
 #include "x86/message.h"
+#include "x86/irq.h"
 
 Console ttys[NR_TTY];
 Console *current_consl;

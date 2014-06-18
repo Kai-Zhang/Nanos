@@ -18,6 +18,5 @@ typedef struct Message Message;
 #define MSG_HWINTR 0
 int send(pid_t, Message*);
 int receive(pid_t, Message*);
-int add_irq_handle(int, void(*)(void));
 
 #endif

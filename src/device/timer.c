@@ -1,9 +1,7 @@
 #include "device/timer.h"
 #include "common/types.h"
 #include "common/string.h"
-#include "x86/thread.h"
-#include "x86/io.h"
-#include "x86/message.h"
+#include "x86.h"
 
 pid_t TIME;
 long jiffy = 0;

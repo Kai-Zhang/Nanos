@@ -1,5 +1,6 @@
 #include "device/tty.h"
 #include "x86/message.h"
+#include "x86/irq.h"
 
 pid_t TTY;
 
