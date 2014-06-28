@@ -3,7 +3,7 @@
 #include "device.h"
 void grading (void);
 void test(void);
-void test_producer(void);
+void test_setup(void);
 
 void
 entry(void) {
@@ -16,7 +16,7 @@ entry(void) {
 	init_thread();
 //	init_tty();
 	enable_interrupt();
-	create_kthread(test_producer);
+	create_kthread(test_setup);
 	while (1) {
 		wait_for_interrupt();
 	}
@@ -33,7 +33,6 @@ Semaphore empty, full, mutex;
  
 void
 test_producer(void) {
-	putchar('Y');
 	while (1) {
 		P(&mutex);
 		P(&empty);
