@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ANY	include/x86/message.h	17;"	kind:macro
+ANY	include/x86/message.h	5;"	kind:macro
 ASFLAGS	Makefile	/^ASFLAGS = -ggdb -m32 -MD$/;"	kind:macro
 BLUE_SCREEN_TEXT	src/lib/abort.c	23;"	kind:macro	file:
 CBUF_SZ	include/device/term.h	34;"	kind:macro
@@ -110,18 +110,22 @@ LIST_HEAD	include/common/list.h	27;"	kind:macro
 LIST_HEAD_INIT	include/common/list.h	25;"	kind:macro
 MSG_DEVRD	include/device/hal.h	7;"	kind:macro
 MSG_DEVWR	include/device/hal.h	8;"	kind:macro
-MSG_HWINTR	include/x86/message.h	18;"	kind:macro
+MSG_HWINTR	include/x86/message.h	21;"	kind:macro
+MSG_SZ	include/x86/message.h	6;"	kind:macro
 MSG_TTY_GETKEY	include/device/tty.h	7;"	kind:macro
 MSG_TTY_UPDATE	include/device/tty.h	8;"	kind:macro
 M_ALT	include/device/term.h	31;"	kind:macro
 M_CTRL	include/device/term.h	30;"	kind:macro
 Message	include/x86/message.h	/^struct Message {$/;"	kind:struct
 Message	include/x86/message.h	/^typedef struct Message Message;$/;"	kind:typedef	typeref:struct:Message
-Message::src	include/x86/message.h	/^	int src;$/;"	kind:member	struct:Message	access:public
+Message::dest	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
+Message::payload	include/x86/message.h	/^	char payload[MSG_SZ];$/;"	kind:member	struct:Message	access:public
+Message::src	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
 Message::type	include/x86/message.h	/^	int type;$/;"	kind:member	struct:Message	access:public
 MsgHead	include/x86/message.h	/^struct MsgHead {$/;"	kind:struct
 MsgHead	include/x86/message.h	/^typedef struct MsgHead MsgHead;$/;"	kind:typedef	typeref:struct:MsgHead
-MsgHead::src	include/x86/message.h	/^	int src;$/;"	kind:member	struct:MsgHead	access:public
+MsgHead::dest	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:MsgHead	access:public
+MsgHead::src	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:MsgHead	access:public
 MsgHead::type	include/x86/message.h	/^	int type;$/;"	kind:member	struct:MsgHead	access:public
 NR_DEV	src/device/hal.c	6;"	kind:macro	file:
 NR_IRQ	include/x86/cpu.h	34;"	kind:macro
@@ -153,7 +157,7 @@ SEG_ASM	boot/asm.h	9;"	kind:macro
 SEG_KERNEL_CODE	include/x86/memory.h	8;"	kind:macro
 SEG_KERNEL_DATA	include/x86/memory.h	9;"	kind:macro
 SEG_NULLASM	boot/asm.h	5;"	kind:macro
-SERIAL_PORT	include/device/serial.h	7;"	kind:macro
+SERIAL_PORT	include/device/serial.h	10;"	kind:macro
 SFILES	Makefile	/^SFILES = $(shell find src\/ -name "*.S")$/;"	kind:macro
 STK_SZ	include/x86/thread.h	8;"	kind:macro
 Semaphore	include/x86/sem.h	/^struct Semaphore {$/;"	kind:struct
@@ -262,6 +266,8 @@ current_consl	include/device/tty.h	/^extern Console *current_consl;$/;"	kind:ext
 current_consl	src/tty/console.c	/^Console *current_consl;$/;"	kind:variable
 day	include/device/timer.h	/^	int year, month, day;$/;"	kind:member	struct:Time	access:public
 del	src/tty/console.c	/^del(Console *c) {$/;"	kind:function	file:	signature:(Console *c)
+dest	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
+dest	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:MsgHead	access:public
 dev_id	include/device/hal.h	/^	int dev_id;$/;"	kind:member	struct:DevMessage	access:public
 dev_id	include/device/hal.h	/^	int dev_id;$/;"	kind:member	struct:Device	access:public
 dev_pool	src/device/hal.c	/^static Device dev_pool[NR_DEV];$/;"	kind:variable	file:
@@ -409,6 +415,7 @@ pad0	include/x86/memory.h	/^	uint32_t pad0             : 8;$/;"	kind:member	stru
 paddr	boot/boot.h	/^	unsigned int paddr;$/;"	kind:member	struct:ProgramHeader	access:public
 panic	include/common/assert.h	/^int panic(const char *);$/;"	kind:prototype	signature:(const char *)
 panic	src/lib/abort.c	/^panic(const char* msg) {$/;"	kind:function	signature:(const char* msg)
+payload	include/x86/message.h	/^	char payload[MSG_SZ];$/;"	kind:member	struct:Message	access:public
 phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	kind:member	struct:ELFHeader	access:public
 phnum	boot/boot.h	/^	unsigned short phnum;$/;"	kind:member	struct:ELFHeader	access:public
 phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	kind:member	struct:ELFHeader	access:public
@@ -419,6 +426,7 @@ pos	include/device/tty.h	/^	int size, pos;$/;"	kind:member	struct:Console	access
 present	include/x86/memory.h	/^	uint32_t present          : 1;$/;"	kind:member	struct:GateDescriptor	access:public
 prev	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::	access:public
 printk	include/device/serial.h	/^int printk(const char*, ...);$/;"	kind:prototype	signature:(const char*, ...)
+printk	include/device/serial.h	5;"	kind:macro
 printk	src/device/serial.c	/^int printk (const char* format, ...) {$/;"	kind:function	signature:(const char* format, ...)
 privilege_level	include/x86/memory.h	/^	uint32_t privilege_level  : 2;$/;"	kind:member	struct:GateDescriptor	access:public
 putc	src/tty/console.c	/^putc(Console *c, char ch) {$/;"	kind:function	file:	signature:(Console *c, char ch)
@@ -468,8 +476,8 @@ sleep	include/x86/thread.h	/^void sleep(void);$/;"	kind:prototype	signature:(voi
 sleep	src/proc/thread.c	/^sleep(void) {$/;"	kind:function	signature:(void)
 sleeping	include/x86/thread.h	/^extern Thread *current, *free, *sleeping, *next;$/;"	kind:externvar
 sleeping	src/proc/thread.c	/^Thread *current, *free, *sleeping, *next;$/;"	kind:variable
-src	include/x86/message.h	/^	int src;$/;"	kind:member	struct:Message	access:public
-src	include/x86/message.h	/^	int src;$/;"	kind:member	struct:MsgHead	access:public
+src	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
+src	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:MsgHead	access:public
 start	boot/start.S	/^start:$/;"	kind:label
 start32	boot/start.S	/^start32:$/;"	kind:label
 stop_thread	include/x86/thread.h	/^void stop_thread(void);$/;"	kind:prototype	signature:(void)
