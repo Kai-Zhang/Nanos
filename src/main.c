@@ -28,21 +28,21 @@ entry(void) {
 #define NR_CONS 4
  
 volatile int buf[NBUF], f = 0, r = 0, g = 1;
-volatile int last = 0;
+int last = 0;
 Semaphore empty, full, mutex;
  
 void
 test_producer(void) {
 	while (1) {
-		P(&mutex);
 		P(&empty);
-//		if(g % 10000 == 0) {
+		P(&mutex);
+		if(g % 10000 == 0) {
 			putchar('.');	// tell us threads are really working
-//		}
+		}
 		buf[f ++] = g ++;
 		f %= NBUF;
-		V(&full);
 		V(&mutex);
+		V(&full);
 	}
 }
  
@@ -50,14 +50,14 @@ void
 test_consumer(void) {
 	int get;
 	while (1) {
-		P(&mutex);
 		P(&full);
+		P(&mutex);
 		get = buf[r ++];
 		assert(last == get - 1);	// the products should be strictly increasing
 		last = get;
 		r %= NBUF;
-		V(&empty);
 		V(&mutex);
+		V(&empty);
 	}
 }
  
