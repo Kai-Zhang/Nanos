@@ -33,6 +33,7 @@ Semaphore empty, full, mutex;
  
 void
 test_producer(void) {
+	putchar('Y');
 	while (1) {
 		P(&mutex);
 		P(&empty);
