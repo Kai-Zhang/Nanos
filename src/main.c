@@ -7,13 +7,14 @@ void test_producer(void);
 
 void
 entry(void) {
-	init_timer();
+//	init_timer();
+	init_i8253();
 	init_idt();
 	init_intr();
 	init_serial();
-	init_hal();
+//	init_hal();
 	init_thread();
-	init_tty();
+//	init_tty();
 	enable_interrupt();
 	create_kthread(test_producer);
 	while (1) {
