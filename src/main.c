@@ -36,9 +36,9 @@ test_producer(void) {
 	while (1) {
 		P(&mutex);
 		P(&empty);
-		if(g % 10000 == 0) {
+//		if(g % 10000 == 0) {
 			putchar('.');	// tell us threads are really working
-		}
+//		}
 		buf[f ++] = g ++;
 		f %= NBUF;
 		V(&full);
