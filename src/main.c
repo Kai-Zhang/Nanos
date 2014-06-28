@@ -5,6 +5,21 @@ void grading (void);
 void test(void);
 void test_producer(void);
 
+void thread_a (void) {
+	while (1) {
+		putchar('a');
+	}
+}
+void thread_b (void) {
+	while (1) {
+		putchar('b');
+	}
+}
+void thread_c (void) {
+	while (1) {
+		putchar('c');
+	}
+}
 void
 entry(void) {
 //	init_timer();
@@ -16,12 +31,15 @@ entry(void) {
 	init_thread();
 //	init_tty();
 	enable_interrupt();
-	create_kthread(test_producer);
+	create_kthread(thread_a);
+	create_kthread(thread_b);
+	create_kthread(thread_c);
 	while (1) {
 		wait_for_interrupt();
 	}
 	assert(0);
 }
+
 #define NBUF 5
 #define NR_PROD 3
 #define NR_CONS 4
