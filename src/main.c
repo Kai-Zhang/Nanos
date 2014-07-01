@@ -15,6 +15,11 @@ entry(void) {
 //	init_hal();
 	init_thread();
 //	init_tty();
+	int eflags = 0;
+	asm volatile ("pushf");
+	asm volatile ("popl %0" : "=r" (eflags));
+	printk("%d\n", eflags);
+	wait_for_interrupt();
 	enable_interrupt();
 	create_kthread(test_setup);
 	while (1) {
