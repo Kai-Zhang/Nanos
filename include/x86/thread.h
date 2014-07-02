@@ -2,19 +2,30 @@
 #define __THREAD_H__
 #include "x86/memory.h"
 #include "x86/cpu.h"
+#include "x86/sem.h"
+#include "x86/message.h"
 #include "common/list.h"
 #include "common/types.h"
 
-#define STK_SZ 1024
-#define THREAD_NUM 66
+#define	STK_SZ		1024
+#define	MSGBUF_SZ	32
+#define	THREAD_NUM	66
 
 struct Thread {
+	/* Stack for a thread */
 	struct TrapFrame* tf;
 	char kstack[STK_SZ];
+	/* Link node for thread management */
 	struct list_head runq, freeq, semq;
+	/* Thread's status */
 	pid_t pid;
 	int is_sleeping;
 	int lock_counter;
+	int unlock_status;
+	/* Message */
+	Semaphore mutex, amount;
+	Message* messages;
+	Message msg_buf[MSGBUF_SZ];
 };
 typedef struct Thread Thread;
 
@@ -39,6 +50,9 @@ void stop_thread(void);
 
 static inline void
 lock(void) {
+	asm volatile ("pushf");
+	asm volatile ("popl %0" : "=r" (current->unlock_status));
+	current->unlock_status = (current->unlock_status & 0x200) >> 9;
 	disable_interrupt();
 	++ current->lock_counter;
 }
@@ -47,7 +61,9 @@ static inline void
 unlock(void) {
 	-- current->lock_counter;
 	if (current->lock_counter <= 0) {
-		enable_interrupt();
+		if (current->unlock_status) {
+			enable_interrupt();
+		}
 	}
 }
 

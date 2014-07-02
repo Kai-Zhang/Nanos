@@ -12,6 +12,9 @@ init_thread(void) {
 	INIT_LIST_HEAD(&(thread_pool[0].runq));
 	INIT_LIST_HEAD(&(thread_pool[0].freeq));
 	thread_pool[0].pid = 0;
+	thread_pool[0].is_sleeping = 0;
+	thread_pool[0].lock_counter = 0;
+	thread_pool[0].unlock_status = 0;
 
 	free = &thread_pool[1];
 	INIT_LIST_HEAD(&(thread_pool[1].runq));
@@ -47,6 +50,7 @@ create_kthread(void (*entry)(void)) {
 	new_thread->tf->eflags = 0x200;
 	new_thread->is_sleeping = 0;
 	new_thread->lock_counter = 0;
+	new_thread->unlock_status = 0;
 	unlock();
 	return new_thread;
 }

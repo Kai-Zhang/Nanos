@@ -4,7 +4,33 @@
 void grading (void);
 void test(void);
 void test_setup(void);
-
+static Thread *a, *b, *c;
+void thread_a (void) {
+	lock();
+	putchar('a');
+	sleep();
+	while (1) {
+		putchar('a');
+	}
+	assert(0);
+}
+void thread_b (void) {
+	int i = 0;
+	for ( ; i < 10; ++i) {
+		putchar('b');
+	}
+	wakeup(a);
+	while (1) {
+		putchar('b');
+	}
+	assert(0);
+}
+void thread_c (void) {
+	while (1) {
+		putchar('c');
+	}
+	assert(0);
+}
 void
 entry(void) {
 //	init_timer();
@@ -15,13 +41,11 @@ entry(void) {
 //	init_hal();
 	init_thread();
 //	init_tty();
-	int eflags = 0;
-	asm volatile ("pushf");
-	asm volatile ("popl %0" : "=r" (eflags));
-	printk("%d\n", eflags);
-	wait_for_interrupt();
+	a = create_kthread(thread_a);
+	b = create_kthread(thread_b);
+	c = create_kthread(thread_c);
 	enable_interrupt();
-	create_kthread(test_setup);
+//	create_kthread(test_setup);
 	while (1) {
 		wait_for_interrupt();
 	}
