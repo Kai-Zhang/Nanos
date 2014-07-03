@@ -10,8 +10,8 @@ static Time rt;
 void
 init_timer(void) {
 	init_i8253();
-	add_irq_handle(0, update_sched);
-	add_irq_handle(0, update_jiffy);
+//	add_irq_handle(0, update_sched);
+//	add_irq_handle(0, update_jiffy);
 
 	int tmp;
 	do {

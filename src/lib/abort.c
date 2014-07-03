@@ -44,8 +44,3 @@ abort(const char *fname, int line) {
 		wait_for_interrupt();
 	}
 }
-
-int 
-panic(const char* msg) {
-	return 1;
-}

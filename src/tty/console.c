@@ -254,7 +254,7 @@ init_consl(Console *c, uint16_t *vbuf) {
 	consl_sync(c);
 }
 
-static void
+void
 send_updatemsg(void) {
 	if (jiffy % (HZ / 10) == 0) {
 		Message m;
@@ -272,7 +272,7 @@ init_console(void) {
 	for (i = 0; i < NR_TTY; i ++) {
 		init_consl(ttys + i, vbuf[i]);
 	}
-	add_irq_handle(0, send_updatemsg);
+//	add_irq_handle(0, send_updatemsg);
 }
 
 

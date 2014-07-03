@@ -5,6 +5,4 @@
 void init_idt(void);
 void init_intr(void);
 
-void add_irq_handle(int, void(*)(void));
-
 #endif

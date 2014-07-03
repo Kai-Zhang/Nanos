@@ -24,4 +24,5 @@ typedef struct Message Message;
 int send(pid_t, Message*);
 int receive(pid_t, Message*);
 
+extern volatile int is_irq;
 #endif

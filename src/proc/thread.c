@@ -51,6 +51,12 @@ create_kthread(void (*entry)(void)) {
 	new_thread->is_sleeping = 0;
 	new_thread->lock_counter = 0;
 	new_thread->unlock_status = 0;
+	init_sem(&(new_thread->mutex), 1);
+	init_sem(&(new_thread->amount), 0);
+	register int i = 0;
+	for (i = 0; i < MSGBUF_SZ; ++i) {
+		INIT_LIST_HEAD(&(new_thread->msg_buf[i].msgq));
+	}
 	unlock();
 	return new_thread;
 }
