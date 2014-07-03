@@ -29,6 +29,7 @@ extern Console ttys[];
 extern const char *ttynames[];
 extern Console *current_consl;
 
+void ttyd(void);
 void init_tty(void);
 void send_keymsg(void);
 void send_updatemsg(void);
