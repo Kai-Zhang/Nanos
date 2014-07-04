@@ -15,6 +15,7 @@ entry(void) {
 	init_tty();
 	Thread* tty_d = create_kthread(ttyd);
 	TTY = tty_d->pid;
+	create_kthread(test);
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
