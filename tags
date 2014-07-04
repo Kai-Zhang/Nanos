@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-ANY	include/x86/message.h	5;"	kind:macro
+ANY	include/x86/message.h	6;"	kind:macro
 ASFLAGS	Makefile	/^ASFLAGS = -ggdb -m32 -MD$/;"	kind:macro
 BLUE_SCREEN_TEXT	src/lib/abort.c	23;"	kind:macro	file:
 CBUF_SZ	include/device/term.h	34;"	kind:macro
@@ -108,10 +108,11 @@ LD	Makefile	/^LD = ld$/;"	kind:macro
 LDFLAGS	Makefile	/^LDFLAGS = -melf_i386$/;"	kind:macro
 LIST_HEAD	include/common/list.h	27;"	kind:macro
 LIST_HEAD_INIT	include/common/list.h	25;"	kind:macro
+MSGBUF_SZ	include/x86/thread.h	11;"	kind:macro
 MSG_DEVRD	include/device/hal.h	7;"	kind:macro
 MSG_DEVWR	include/device/hal.h	8;"	kind:macro
-MSG_HWINTR	include/x86/message.h	21;"	kind:macro
-MSG_SZ	include/x86/message.h	6;"	kind:macro
+MSG_HWINTR	include/x86/message.h	23;"	kind:macro
+MSG_SZ	include/x86/message.h	7;"	kind:macro
 MSG_TTY_GETKEY	include/device/tty.h	7;"	kind:macro
 MSG_TTY_UPDATE	include/device/tty.h	8;"	kind:macro
 M_ALT	include/device/term.h	31;"	kind:macro
@@ -119,6 +120,7 @@ M_CTRL	include/device/term.h	30;"	kind:macro
 Message	include/x86/message.h	/^struct Message {$/;"	kind:struct
 Message	include/x86/message.h	/^typedef struct Message Message;$/;"	kind:typedef	typeref:struct:Message
 Message::dest	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
+Message::msgq	include/x86/message.h	/^	list_head msgq;$/;"	kind:member	struct:Message	access:public
 Message::payload	include/x86/message.h	/^	char payload[MSG_SZ];$/;"	kind:member	struct:Message	access:public
 Message::src	include/x86/message.h	/^	pid_t src, dest;$/;"	kind:member	struct:Message	access:public
 Message::type	include/x86/message.h	/^	int type;$/;"	kind:member	struct:Message	access:public
@@ -159,12 +161,12 @@ SEG_KERNEL_DATA	include/x86/memory.h	9;"	kind:macro
 SEG_NULLASM	boot/asm.h	5;"	kind:macro
 SERIAL_PORT	include/device/serial.h	10;"	kind:macro
 SFILES	Makefile	/^SFILES = $(shell find src\/ -name "*.S")$/;"	kind:macro
-STK_SZ	include/x86/thread.h	8;"	kind:macro
+STK_SZ	include/x86/thread.h	10;"	kind:macro
 Semaphore	include/x86/sem.h	/^struct Semaphore {$/;"	kind:struct
 Semaphore	include/x86/sem.h	/^typedef struct Semaphore Semaphore;$/;"	kind:typedef	typeref:struct:Semaphore
 Semaphore::count	include/x86/sem.h	/^	int count;$/;"	kind:member	struct:Semaphore	access:public
 Semaphore::queue	include/x86/sem.h	/^	struct list_head queue;$/;"	kind:member	struct:Semaphore	typeref:struct:Semaphore::list_head	access:public
-THREAD_NUM	include/x86/thread.h	9;"	kind:macro
+THREAD_NUM	include/x86/thread.h	12;"	kind:macro
 TIME	src/device/timer.c	/^pid_t TIME;$/;"	kind:variable
 TRAP_GATE_32	src/irq/idt.c	4;"	kind:macro	file:
 TRUE	include/common/const.h	4;"	kind:macro
@@ -172,14 +174,19 @@ TTY	include/device/tty.h	/^extern pid_t TTY;$/;"	kind:externvar
 TTY	src/tty/tty.c	/^pid_t TTY;$/;"	kind:variable
 Thread	include/x86/thread.h	/^struct Thread {$/;"	kind:struct
 Thread	include/x86/thread.h	/^typedef struct Thread Thread;$/;"	kind:typedef	typeref:struct:Thread
+Thread::amount	include/x86/thread.h	/^	Semaphore mutex, amount;$/;"	kind:member	struct:Thread	access:public
 Thread::freeq	include/x86/thread.h	/^	struct list_head runq, freeq, semq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::	access:public
 Thread::is_sleeping	include/x86/thread.h	/^	int is_sleeping;$/;"	kind:member	struct:Thread	access:public
 Thread::kstack	include/x86/thread.h	/^	char kstack[STK_SZ];$/;"	kind:member	struct:Thread	access:public
 Thread::lock_counter	include/x86/thread.h	/^	int lock_counter;$/;"	kind:member	struct:Thread	access:public
+Thread::messages	include/x86/thread.h	/^	Message* messages;$/;"	kind:member	struct:Thread	access:public
+Thread::msg_buf	include/x86/thread.h	/^	Message msg_buf[MSGBUF_SZ];$/;"	kind:member	struct:Thread	access:public
+Thread::mutex	include/x86/thread.h	/^	Semaphore mutex, amount;$/;"	kind:member	struct:Thread	access:public
 Thread::pid	include/x86/thread.h	/^	pid_t pid;$/;"	kind:member	struct:Thread	access:public
 Thread::runq	include/x86/thread.h	/^	struct list_head runq, freeq, semq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::list_head	access:public
 Thread::semq	include/x86/thread.h	/^	struct list_head runq, freeq, semq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::	access:public
 Thread::tf	include/x86/thread.h	/^	struct TrapFrame* tf;$/;"	kind:member	struct:Thread	typeref:struct:Thread::TrapFrame	access:public
+Thread::unlock_status	include/x86/thread.h	/^	int unlock_status;$/;"	kind:member	struct:Thread	access:public
 Time	include/device/timer.h	/^struct Time {$/;"	kind:struct
 Time	include/device/timer.h	/^typedef struct Time Time;$/;"	kind:typedef	typeref:struct:Time
 Time::day	include/device/timer.h	/^	int year, month, day;$/;"	kind:member	struct:Time	access:public
@@ -228,14 +235,13 @@ __list_del	include/common/list.h	/^static inline void __list_del(struct list_hea
 __list_splice	include/common/list.h	/^static inline void __list_splice(struct list_head *list,$/;"	kind:function	signature:(struct list_head *list, struct list_head *head)
 abort	include/common/assert.h	/^int abort(const char *, int);$/;"	kind:prototype	signature:(const char *, int)
 abort	src/lib/abort.c	/^abort(const char *fname, int line) {$/;"	kind:function	signature:(const char *fname, int line)
-add_irq_handle	include/x86/irq.h	/^void add_irq_handle(int, void(*)(void));$/;"	kind:prototype	signature:(int, void(*)(void))
-add_irq_handle	src/irq/idt.c	/^add_irq_handle(int irq_num, void (*handler)(void)) {$/;"	kind:function	signature:(int irq_num, void (*handler)(void))
 align	boot/boot.h	/^	unsigned int align;$/;"	kind:member	struct:ProgramHeader	access:public
 alt	src/tty/keyboard.c	/^static int caps, ctrl, alt, shft;$/;"	kind:variable	file:
+amount	include/x86/thread.h	/^	Semaphore mutex, amount;$/;"	kind:member	struct:Thread	access:public
 ani	src/tty/banner.c	/^static char ani[] = "-\\\\|\/";$/;"	kind:variable	file:
 append	src/lib/abort.c	/^append(char **p, const char *str) {$/;"	kind:function	file:	signature:(char **p, const char *str)
 asm_do_irq	src/irq/do_irq.S	/^asm_do_irq:$/;"	kind:label
-assert	include/common/assert.h	8;"	kind:macro
+assert	include/common/assert.h	12;"	kind:macro
 backsp	src/tty/console.c	/^backsp(Console *c) {$/;"	kind:function	file:	signature:(Console *c)
 banner	src/tty/banner.c	/^extern char banner[SCR_W + 1];$/;"	kind:externvar
 banner	src/tty/console.c	/^char banner[SCR_W + 1];$/;"	kind:variable
@@ -309,8 +315,6 @@ gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	kin
 get_cooked	src/tty/console.c	/^get_cooked(Console *c, char *buf, int count) {$/;"	kind:function	signature:(Console *c, char *buf, int count)
 get_time	include/device/timer.h	/^void get_time(Time *tm);$/;"	kind:prototype	signature:(Time *tm)
 get_time	src/device/timer.c	/^get_time(Time *tm) {$/;"	kind:function	signature:(Time *tm)
-grading	src/main.c	/^grading (void) {$/;"	kind:function	signature:(void)
-grading	src/main.c	/^void grading (void);$/;"	kind:prototype	file:	signature:(void)
 h	include/device/tty.h	/^	int w, h, wh;$/;"	kind:member	struct:Console	access:public
 hal_get	include/device/hal.h	/^Device *hal_get(const char *name);$/;"	kind:prototype	signature:(const char *name)
 hal_get	src/device/hal.c	/^hal_get(const char *name) {$/;"	kind:function	signature:(const char *name)
@@ -352,8 +356,11 @@ int8_t	include/common/types.h	/^typedef          char  int8_t;$/;"	kind:typedef
 irq	include/x86/memory.h	/^	int32_t irq;$/;"	kind:member	struct:TrapFrame	access:public
 irq0	src/irq/idt.c	/^void irq0();$/;"	kind:prototype	file:
 irq1	src/irq/idt.c	/^void irq1();$/;"	kind:prototype	file:
+irq128	src/irq/idt.c	/^void irq128();$/;"	kind:prototype	file:
 irq_empty	src/irq/idt.c	/^void irq_empty();$/;"	kind:prototype	file:
 irq_handle	src/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	kind:function	signature:(struct TrapFrame *tf)
+is_irq	include/x86/message.h	/^extern volatile int is_irq;$/;"	kind:externvar
+is_irq	src/irq/irq_handle.c	/^volatile int is_irq = 0;$/;"	kind:variable
 is_sleeping	include/x86/thread.h	/^	int is_sleeping;$/;"	kind:member	struct:Thread	access:public
 itoa	src/lib/abort.c	/^itoa(int a) {$/;"	kind:function	file:	signature:(int a)
 jiffy	include/device/timer.h	/^extern long jiffy;$/;"	kind:externvar
@@ -394,10 +401,14 @@ memcpy	src/lib/string.c	/^memcpy(void *dst, const void *src, size_t count) {$/;"
 memset	include/common/string.h	/^void *memset(void *, int, size_t);$/;"	kind:prototype	signature:(void *, int, size_t)
 memset	src/lib/string.c	/^memset(void *dst, int val, size_t count) {$/;"	kind:function	signature:(void *dst, int val, size_t count)
 memsz	boot/boot.h	/^	unsigned int memsz;$/;"	kind:member	struct:ProgramHeader	access:public
+messages	include/x86/thread.h	/^	Message* messages;$/;"	kind:member	struct:Thread	access:public
 minute	include/device/timer.h	/^	int hour, minute, second;$/;"	kind:member	struct:Time	access:public
 month	include/device/timer.h	/^	int year, month, day;$/;"	kind:member	struct:Time	access:public
 movl	src/tty/console.c	/^movl(Console *c) {$/;"	kind:function	file:	signature:(Console *c)
 movr	src/tty/console.c	/^movr(Console *c) {$/;"	kind:function	file:	signature:(Console *c)
+msg_buf	include/x86/thread.h	/^	Message msg_buf[MSGBUF_SZ];$/;"	kind:member	struct:Thread	access:public
+msgq	include/x86/message.h	/^	list_head msgq;$/;"	kind:member	struct:Message	access:public
+mutex	include/x86/thread.h	/^	Semaphore mutex, amount;$/;"	kind:member	struct:Thread	access:public
 name	include/device/hal.h	/^	const char *name;$/;"	kind:member	struct:Device	access:public
 name	include/device/tty.h	/^	const char *name;$/;"	kind:member	struct:Console	access:public
 next	include/common/list.h	/^	struct list_head *next, *prev;$/;"	kind:member	struct:list_head	typeref:struct:list_head::list_head	access:public
@@ -414,7 +425,7 @@ out_byte	include/x86/io.h	/^out_byte(uint16_t port, int8_t data) {$/;"	kind:func
 pad0	include/x86/memory.h	/^	uint32_t pad0             : 8;$/;"	kind:member	struct:GateDescriptor	access:public
 paddr	boot/boot.h	/^	unsigned int paddr;$/;"	kind:member	struct:ProgramHeader	access:public
 panic	include/common/assert.h	/^int panic(const char *);$/;"	kind:prototype	signature:(const char *)
-panic	src/lib/abort.c	/^panic(const char* msg) {$/;"	kind:function	signature:(const char* msg)
+panic	include/common/assert.h	8;"	kind:macro
 payload	include/x86/message.h	/^	char payload[MSG_SZ];$/;"	kind:member	struct:Message	access:public
 phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	kind:member	struct:ELFHeader	access:public
 phnum	boot/boot.h	/^	unsigned short phnum;$/;"	kind:member	struct:ELFHeader	access:public
@@ -444,7 +455,7 @@ readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	kind:function	signa
 readseg	boot/main.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	kind:function	signature:(unsigned char *pa, int count, int offset)
 readseg	boot/main.c	/^void readseg(unsigned char *, int, int);$/;"	kind:prototype	file:	signature:(unsigned char *, int, int)
 receive	include/x86/message.h	/^int receive(pid_t, Message*);$/;"	kind:prototype	signature:(pid_t, Message*)
-receive	src/proc/message.c	/^receive(pid_t dst, Message *msg) {$/;"	kind:function	signature:(pid_t dst, Message *msg)
+receive	src/proc/message.c	/^receive(pid_t src, Message *msg) {$/;"	kind:function	signature:(pid_t src, Message *msg)
 removec	src/tty/console.c	/^removec(Console *c) {$/;"	kind:function	file:	signature:(Console *c)
 rstk	include/device/tty.h	/^	Message rstk[RSTK_SZ];$/;"	kind:member	struct:Console	access:public
 rt	src/device/timer.c	/^static Time rt;$/;"	kind:variable	file:
@@ -459,9 +470,10 @@ segment	include/x86/memory.h	/^	uint32_t segment          : 16;$/;"	kind:member	
 semq	include/x86/thread.h	/^	struct list_head runq, freeq, semq;$/;"	kind:member	struct:Thread	typeref:struct:Thread::	access:public
 send	include/x86/message.h	/^int send(pid_t, Message*);$/;"	kind:prototype	signature:(pid_t, Message*)
 send	src/proc/message.c	/^send(pid_t dst, Message *msg) {$/;"	kind:function	signature:(pid_t dst, Message *msg)
+send_keymsg	include/device/tty.h	/^void send_keymsg(void);$/;"	kind:prototype	signature:(void)
 send_keymsg	src/tty/keyboard.c	/^send_keymsg(void) {$/;"	kind:function	signature:(void)
-send_keymsg	src/tty/tty.c	/^void send_keymsg(void);$/;"	kind:prototype	file:	signature:(void)
-send_updatemsg	src/tty/console.c	/^send_updatemsg(void) {$/;"	kind:function	file:	signature:(void)
+send_updatemsg	include/device/tty.h	/^void send_updatemsg(void);$/;"	kind:prototype	signature:(void)
+send_updatemsg	src/tty/console.c	/^send_updatemsg(void) {$/;"	kind:function	signature:(void)
 serial_idle	src/device/serial.c	/^serial_idle(void) {$/;"	kind:function	file:	signature:(void)
 set_intr	src/irq/idt.c	/^set_intr(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	kind:function	file:	signature:(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl)
 set_trap	src/irq/idt.c	/^set_trap(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	kind:function	file:	signature:(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl)
@@ -492,6 +504,7 @@ thread_pool	include/x86/thread.h	/^extern Thread thread_pool[THREAD_NUM];$/;"	ki
 thread_pool	src/proc/thread.c	/^Thread thread_pool[THREAD_NUM];$/;"	kind:variable
 timerd	include/device/timer.h	/^void timerd(void);$/;"	kind:prototype	signature:(void)
 tsc	src/tty/banner.c	/^static int tsc = 0;$/;"	kind:variable	file:
+ttyd	include/device/tty.h	/^void ttyd(void);$/;"	kind:prototype	signature:(void)
 ttyd	src/tty/tty.c	/^void ttyd(void);$/;"	kind:prototype	file:	signature:(void)
 ttyd	src/tty/ttyd.c	/^ttyd(void) {$/;"	kind:function	signature:(void)
 ttynames	include/device/tty.h	/^extern const char *ttynames[];$/;"	kind:externvar
@@ -507,6 +520,7 @@ uint16_t	include/common/types.h	/^typedef unsigned short uint16_t;$/;"	kind:type
 uint32_t	include/common/types.h	/^typedef unsigned int   uint32_t;$/;"	kind:typedef
 uint8_t	include/common/types.h	/^typedef unsigned char  uint8_t;$/;"	kind:typedef
 unlock	include/x86/thread.h	/^unlock(void) {$/;"	kind:function	signature:(void)
+unlock_status	include/x86/thread.h	/^	int unlock_status;$/;"	kind:member	struct:Thread	access:public
 update_banner	include/device/tty.h	/^void update_banner(void);$/;"	kind:prototype	signature:(void)
 update_banner	src/tty/banner.c	/^void update_banner(void) {$/;"	kind:function	signature:(void)
 update_jiffy	include/device/timer.h	/^void update_jiffy(void);$/;"	kind:prototype	signature:(void)
@@ -521,7 +535,6 @@ vec1	src/irq/idt.c	/^void vec1();$/;"	kind:prototype	file:
 vec10	src/irq/idt.c	/^void vec10();$/;"	kind:prototype	file:
 vec11	src/irq/idt.c	/^void vec11();$/;"	kind:prototype	file:
 vec12	src/irq/idt.c	/^void vec12();$/;"	kind:prototype	file:
-vec128	src/irq/idt.c	/^void vec128();$/;"	kind:prototype	file:
 vec13	src/irq/idt.c	/^void vec13();$/;"	kind:prototype	file:
 vec2	src/irq/idt.c	/^void vec2();$/;"	kind:prototype	file:
 vec3	src/irq/idt.c	/^void vec3();$/;"	kind:prototype	file:
