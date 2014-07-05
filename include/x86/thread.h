@@ -8,7 +8,7 @@
 #include "common/types.h"
 
 #define	STK_SZ		1024
-#define	MSGBUF_SZ	64
+#define	MSGBUF_SZ	256
 #define	THREAD_NUM	66
 
 struct Thread {
