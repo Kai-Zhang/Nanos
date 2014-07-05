@@ -21,8 +21,8 @@ send(pid_t dst, Message *msg) {
 		}
 	}
 	assert(new_msg);
-	memcpy(new_msg, msg, sizeof(Message));
-	INIT_LIST_HEAD(&(new_msg->msgq));	
+	memcpy(new_msg, msg, sizeof(Message) - sizeof(list_head));
+	INIT_LIST_HEAD(&(new_msg->msgq));
 	if (!thread_pool[dst].messages) {
 		thread_pool[dst].messages = new_msg;
 	} else {
@@ -58,7 +58,7 @@ receive(pid_t src, Message *msg) {
 			break;
 		}
 	}
-	memcpy(msg, proc_msg, sizeof(Message));
+	memcpy(msg, proc_msg, sizeof(Message) - sizeof(list_head));
 	if (current->messages == proc_msg) {
 		current->messages = list_entry(current->messages->msgq.next, Message, msgq);
 		if (current->messages == proc_msg) {

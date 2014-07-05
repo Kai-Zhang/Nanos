@@ -8,9 +8,9 @@
 #define MSG_DEVWR  2
 struct DevMessage {
 	MsgHead header; // header与Message的头部定义保持一致即可(src, dst, type)
+	void *buf;
 	int dev_id;
 	off_t offset;
-	void *buf;
 	size_t count;
 };
 typedef struct DevMessage DevMessage;
