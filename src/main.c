@@ -32,11 +32,11 @@ entry(void) {
 	init_hal();
 	init_thread();
 	init_tty();
-	create_kthread(sender);
-	create_kthread(receiver);
-//	Thread* tty_d = create_kthread(ttyd);
-//	TTY = tty_d->pid;
-//	test();
+//	create_kthread(sender);
+//	create_kthread(receiver);
+	Thread* tty_d = create_kthread(ttyd);
+	TTY = tty_d->pid;
+	test();
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
