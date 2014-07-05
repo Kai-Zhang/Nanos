@@ -3,26 +3,6 @@
 #include "device.h"
 void test(void);
 
-void sender (void) {
-	while (1) {
-		int i = 0;
-		for (i = 0; i < 10; ++i) {
-			Message msg;
-			msg.type = i;
-			msg.dest = 2;
-			send(1, &msg);
-		}
-	}
-}
-
-void receiver (void) {
-	while (1) {
-		Message* msg = (void*)0;
-		receive(ANY, msg);
-		printk("%d type message: from %d\n", msg->type, msg->src);
-	}
-}
-
 void
 entry(void) {
 	init_timer();
