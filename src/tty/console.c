@@ -7,7 +7,8 @@
 Console ttys[NR_TTY];
 Console *current_consl;
 
-const char *ttynames[NR_TTY] = {"tty1", "tty2", "tty3", "tty4"};
+//const char *ttynames[NR_TTY] = {"tty1", "tty2", "tty3", "tty4"};
+const char *ttynames[NR_TTY] = {"tty1"};
 static uint16_t *vmem = (void*)/*pa_to_va*/(0xb8000);
 
 static uint16_t vbuf[NR_TTY][SCR_W * SCR_H * 2];

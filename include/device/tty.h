@@ -3,7 +3,7 @@
 #include "common/types.h"
 #include "device/hal.h"
 
-#define NR_TTY         4
+#define NR_TTY         1
 #define MSG_TTY_GETKEY 1
 #define MSG_TTY_UPDATE 2
 #define LBUF_SZ        256
