@@ -36,21 +36,21 @@ send(pid_t dst, Message *msg) {
 int
 receive(pid_t src, Message *msg) {
 	Message *trv = current->messages;
-	msg = NULL;
+	Message *proc_msg = NULL;
 	while (1) {
 		P(&(current->amount));
 		P(&(current->mutex));
 		if (src == ANY || current->messages->src == src) {
-			msg = current->messages;
+			proc_msg = current->messages;
 			break;
 		}
 		list_for_each_entry(trv, &(current->messages->msgq), msgq) {
 			if (trv->src == src) {
-				msg = trv;
+				proc_msg = trv;
 				break;
 			}
 		}
-		if (!msg) {
+		if (!proc_msg) {
 			V(&(current->mutex));
 			V(&(current->amount));
 			continue;
@@ -58,13 +58,14 @@ receive(pid_t src, Message *msg) {
 			break;
 		}
 	}
-	if (current->messages == msg) {
+	memcpy(msg, proc_msg, sizeof(Message));
+	if (current->messages == proc_msg) {
 		current->messages = list_entry(current->messages->msgq.next, Message, msgq);
-		if (current->messages == msg) {
+		if (current->messages == proc_msg) {
 			current->messages = NULL;
 		}
 	}
-	list_del_init(&(msg->msgq));
+	list_del_init(&(proc_msg->msgq));
 	V(&(current->mutex));
 	return 1;
 }
