@@ -14,6 +14,12 @@ irq_handle(struct TrapFrame *tf) {
 		update_sched();
 		update_jiffy();
 		send_updatemsg();
+		
+		if (current->messages == NULL) {
+			printk("No Messages!\n");
+		} else {
+			printk("Type: %d, Src: %d, Dst: %d", current->messages->type, current->messages->src, current->messages->dest);
+		}
 	} else if (tf->irq == 1001) {
 		send_keymsg();
 		/*uint32_t code = in_byte(0x60);
