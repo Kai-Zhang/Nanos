@@ -22,6 +22,7 @@ send(pid_t dst, Message *msg) {
 	}
 	assert(new_msg);
 	memcpy(new_msg, msg, sizeof(Message));
+	INIT_LIST_HEAD(&(new_msg->msgq));	
 	if (!thread_pool[dst].messages) {
 		thread_pool[dst].messages = new_msg;
 	} else {
@@ -55,6 +56,12 @@ receive(pid_t src, Message *msg) {
 			continue;
 		} else {
 			break;
+		}
+	}
+	if (current->messages == msg) {
+		current->messages = list_entry(current->messages->msgq.next, Message, msgq);
+		if (current->messages == msg) {
+			current->messages = NULL;
 		}
 	}
 	list_del_init(&(msg->msgq));
