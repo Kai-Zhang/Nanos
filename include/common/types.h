@@ -12,5 +12,5 @@ typedef unsigned int   size_t;
 
 typedef          int   bool;
 typedef          int   off_t;
-typedef unsigned int   pid_t;
+typedef          int   pid_t;
 #endif
