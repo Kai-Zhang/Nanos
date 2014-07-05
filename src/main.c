@@ -6,7 +6,6 @@ void test(void);
 void
 entry(void) {
 	init_timer();
-	init_i8253();
 	init_idt();
 	init_intr();
 	init_serial();
