@@ -16,7 +16,7 @@ irq_handle(struct TrapFrame *tf) {
 		send_updatemsg();
 		
 		if (current->messages == NULL) {
-			printk("Pid: %d, No Messages!\n", current->pid);
+//			printk("Pid: %d, No Messages!\n", current->pid);
 		} else {
 			list_head *it = NULL;
 			list_for_each(it, &(current->messages->msgq)) {
