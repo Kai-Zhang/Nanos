@@ -3,6 +3,26 @@
 #include "device.h"
 void test(void);
 
+void sender (void) {
+	while (1) {
+		int i = 0;
+		for (i = 0; i < 10; ++i) {
+			Message msg;
+			msg.type = i;
+			msg.dest = 2;
+			send(1, &msg);
+		}
+	}
+}
+
+void receiver (void) {
+	while (1) {
+		Message* msg = (void*)0;
+		receive(ANY, msg);
+		printk("%d type message: from %d\n", msg->type, msg->src);
+	}
+}
+
 void
 entry(void) {
 	init_timer();
@@ -12,9 +32,11 @@ entry(void) {
 	init_hal();
 	init_thread();
 	init_tty();
-	Thread* tty_d = create_kthread(ttyd);
-	TTY = tty_d->pid;
-	test();
+	create_kthread(sender);
+	create_kthread(receiver);
+//	Thread* tty_d = create_kthread(ttyd);
+//	TTY = tty_d->pid;
+//	test();
 	enable_interrupt();
 	while (1) {
 		wait_for_interrupt();
