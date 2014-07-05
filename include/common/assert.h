@@ -2,7 +2,6 @@
 #define __ASSERT_H__
 
 int abort(const char *, int);
-int panic(const char *);
 
 /* panic: 退出系统 */
 #define panic(...) \
