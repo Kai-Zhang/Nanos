@@ -9,6 +9,7 @@ send(pid_t dst, Message *msg) {
 	} else {
 		msg->src = current->pid;
 	}
+	msg->dest = dst;
 	P(&(thread_pool[dst].mutex));
 	Message *new_msg = NULL;
 	register int i = 0;
