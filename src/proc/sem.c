@@ -13,7 +13,7 @@ P(Semaphore *sem) {
 	lock();
 	sem->count --;
 	if (sem->count < 0) {
-		list_add(&sem->queue, &current->semq); // You should add ListHead semq in the Thread structure
+		list_add(&current->semq, &sem->queue); // You should add ListHead semq in the Thread structure
 		sleep(); // sleep!
 	}
 	unlock();

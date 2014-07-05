@@ -13,7 +13,7 @@ init_hal(void) {
 	int i = 0;
 	INIT_LIST_HEAD(&freeq);
 	for (i = 0; i < NR_DEV; i ++) {
-		list_add(&freeq, &dev_pool[i].list);
+		list_add(&dev_pool[i].list, &freeq);
 	}
 	INIT_LIST_HEAD(&devices);
 }
@@ -29,7 +29,7 @@ hal_register(const char *name, pid_t pid, int dev_id) {
 	dev->name = name;
 	dev->pid = pid;
 	dev->dev_id = dev_id;
-	list_add(&devices, &dev->list);
+	list_add(&dev->list, &devices);
 	unlock();
 }
 
