@@ -4,7 +4,7 @@ NJUOS
 ## A simple operation system
 A simple project for operation system class.  
 Thanks to jyy.  
-Original Project on: [NJUOS]:  <https://github.com/NJUOS>
+Original Project on: <https://github.com/NJUOS>
 
 ## NJUOS supports
 * a simple bootloader to boot from the very beginning
