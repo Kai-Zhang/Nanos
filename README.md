@@ -1,4 +1,4 @@
-NJUOS
+Nanos
 ====
 
 ## A simple operation system
