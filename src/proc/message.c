@@ -28,6 +28,7 @@ send(pid_t dst, Message *msg) {
 	} else {
 		list_add_tail(&(new_msg->msgq), &(thread_pool[dst].messages->msgq));
 	}
+	wakeup(&thread_pool[dst]);
 	V(&(thread_pool[dst].mutex));
 	V(&(thread_pool[dst].amount));
 	return 1;
@@ -53,6 +54,7 @@ receive(pid_t src, Message *msg) {
 		if (!proc_msg) {
 			V(&(current->mutex));
 			V(&(current->amount));
+			sleep();
 			continue;
 		} else {
 			break;
